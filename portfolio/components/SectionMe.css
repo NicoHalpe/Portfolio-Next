@@ -1,0 +1,125 @@
+#me {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#me .content {
+	display: flex;
+	flex-direction: column;
+	gap: 1vh;
+}
+
+#me .content h1 span {
+	font-size: clamp(1.9rem, 6vw, 4.5rem);
+	opacity: 0;
+	transition: color 0.3s ease-in-out;
+}
+#me .content h1 span.bounceIn {
+	animation-name: bounceIn;
+	animation-duration: 0.75s;
+}
+
+#me .content p {
+	font-size: clamp(1rem, 4vw, 2rem);
+	color: var(--subtitle-color);
+	animation: enter-left 0.9s ease-in-out;
+}
+
+#me .content a {
+	font-size: clamp(1rem, 3.5vw, 1.7rem);
+	width: fit-content;
+	border-radius: 5px;
+	border: 2px solid var(--color-accent);
+	color: var(--color-accent);
+	padding: 8px 25px;
+	text-decoration: none;
+	margin-top: 3vh;
+	animation: enter-left 1.1s ease-in-out;
+}
+
+#me .content a:hover,
+#me .content a:focus {
+	color: var(--button-focus-text-color);
+	box-shadow: inset 300px 0 0 0 var(--color-accent);
+	outline: none;
+}
+
+#me #avatar {
+	width: 30%;
+	height: auto;
+	animation: enter-right 0.8s ease-in-out;
+}
+
+#me #hoverelement {
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+	#me #avatar {
+		width: 60%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	#me {
+		height: 88vh;
+		min-height: 88vh;
+		flex-direction: column-reverse;
+		justify-content: start;
+		gap: 5vh;
+		padding-top: 10vh;
+	}
+}
+
+@keyframes bounceIn {
+	80% {
+		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	}
+	0% {
+		opacity: 0;
+		transform: scale3d(0.3, 0.3, 0.3);
+	}
+	20% {
+		transform: scale3d(1.1, 1.1, 1.1);
+	}
+	40% {
+		transform: scale3d(0.9, 0.9, 0.9);
+	}
+	60% {
+		opacity: 1;
+		transform: scale3d(1.03, 1.03, 1.03);
+	}
+	80% {
+		transform: scale3d(0.97, 0.97, 0.97);
+	}
+	100% {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes rubberBand {
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
+	30% {
+		transform: scale3d(1.25, 0.75, 1);
+	}
+	40% {
+		transform: scale3d(0.75, 1.25, 1);
+	}
+	50% {
+		transform: scale3d(1.15, 0.85, 1);
+	}
+	65% {
+		transform: scale3d(0.95, 1.05, 1);
+	}
+	75% {
+		transform: scale3d(1.05, 0.95, 1);
+	}
+	100% {
+		transform: scale3d(1, 1, 1);
+	}
+}

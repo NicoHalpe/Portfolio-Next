@@ -1,0 +1,26 @@
+{
+  "short_name": "Nico Halperin",
+  "name": "Nicolas Halperin",
+  "icons": [
+      {
+          "src": "img/avatar.svg",
+          "type": "image/x-icon",
+          "sizes": "64x64 32x32 24x24 16x16",
+          "purpose": "any maskable"
+      },
+      {
+          "src": "img/avatar192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+      },
+      {
+          "src": "img/avatar512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+      }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

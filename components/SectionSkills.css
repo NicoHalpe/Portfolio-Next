@@ -1,0 +1,93 @@
+#skills h2 {
+	visibility: hidden;
+	font-size: clamp(2rem, 6vw, 4.5rem);
+	color: var(--color-accent);
+	margin-bottom: 5vh;
+}
+
+#skills .cards {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+#skills.visible h2 {
+	visibility: visible;
+	animation: enter-left 0.6s ease-in-out;
+}
+
+#skills.visible .cards .card {
+	margin-top: 0;
+	visibility: visible;
+	animation: flip-in-ver-right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#skills .cards .card {
+	margin-top: 200px;
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	outline: 2px solid var(--text-color);
+	background-color: var(--background-color);
+	border-radius: 10px;
+	width: 100%;
+	padding: 4vh 1vw;
+	gap: 30px;
+	transform-style: preserve-3d;
+	transform: perspective(1000px);
+	box-sizing: border-box;
+}
+#skills .cards .card:hover {
+	z-index: 2;
+}
+
+#skills .cards .card .header,
+#skills .cards .card .languages,
+#skills .cards .card .tools {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: translateZ(30px);
+}
+
+#skills .card-icon {
+	height: 52px;
+	padding: 10px;
+}
+
+#skills .card h3 {
+	padding-bottom: 5px;
+	color: var(--text-color);
+	font-size: clamp(1.4rem, 4vw, 1.5rem);
+}
+
+#skills .card h4 {
+	color: var(--color-accent);
+	font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+#skills .card p {
+	margin-top: 15px;
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+#skills .card ul {
+	list-style: none;
+}
+
+#skills .card li {
+	margin-top: 15px;
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+@media only screen and (max-width: 1000px) {
+	#skills .cards {
+		flex-direction: column;
+	}
+
+	#skills {
+		padding-bottom: 10vh;
+	}
+}
