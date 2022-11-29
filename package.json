@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "deploy": "npm run build && npm run export",
+    "local": "npm run build && npm start"
   },
   "dependencies": {
     "@georgedoescode/spline": "^1.0.1",
@@ -16,10 +17,12 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "@zeit/next-css": "^1.0.1",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
     "next": "13.0.5",
     "next-transpile-modules": "^10.0.0",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-parallax-tilt": "^1.7.71",

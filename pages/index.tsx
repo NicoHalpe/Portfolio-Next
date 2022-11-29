@@ -1,6 +1,12 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect } from "react";
 import SectionMe from "./../components/SectionMe";
+
+/* const SectionAbout = dynamic(() => import("./../components/SectionAbout"));
+const SectionSkills = dynamic(() => import("./../components/SectionSkills"));
+const SectionProyects = dynamic(() => import("./../components/SectionProyects"));
+const SectionContact = dynamic(() => import("./../components/SectionContact")); */
 import SectionAbout from "./../components/SectionAbout";
 import SectionSkills from "./../components/SectionSkills";
 import SectionProyects from "./../components/SectionProyects";
@@ -85,7 +91,6 @@ export default function Home() {
 			<SectionSkills />
 			<SectionProyects />
 			<SectionContact />
-
 		</>
 	);
 }

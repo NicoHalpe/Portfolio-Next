@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from "react";
-/* import "./SectionMe.css"; */
 import { spline } from "@georgedoescode/spline";
 import SimplexNoise from "simplex-noise";
-import Image from "next/image";
 import Avatar from "./Avatar";
+
+import styles from "./SectionMe.module.css";
 
 export default function SectionMe() {
 	const [noiseStep, setNoiseStep] = React.useState(0.0005);
@@ -25,7 +25,7 @@ export default function SectionMe() {
 	);
 
 	const animate = useCallback(() => {
-		if(!avatar) return;
+		if (!avatar) return;
 		const path = avatar.querySelector("path");
 		const path2 = avatar.getElementById("react-path-2");
 
@@ -78,7 +78,6 @@ export default function SectionMe() {
 
 		const setupAvatar = () => {
 			try {
-				console.log("setupAvatar");
 				const path2 = avatar.getElementById("react-path-2");
 				const transform = avatar.getElementById("transform");
 				transform.setAttribute("transform", "translate(845.000000, 1130.000000)");
@@ -87,7 +86,6 @@ export default function SectionMe() {
 				const simplex = new SimplexNoise();
 				setSimplex(simplex);
 				const points = createPoints();
-				console.log("points", points);
 				setPoints(points);
 
 				function createPoints() {
@@ -132,13 +130,13 @@ export default function SectionMe() {
 	}, [avatarRef, avatar]);
 
 	useEffect(() => {
-		[...document.querySelectorAll("#me .content h1 span")].map((el, i) => {
+		[...document.querySelectorAll(`#me .${styles.content} h1 span`)].map((el, i) => {
 			el.style.setProperty("animation-delay", `${i * 50}ms`, "");
-			el.classList.add("bounceIn");
+			el.classList.add(styles.bounceIn);
 			el.addEventListener("animationend", (e) => {
-				if (e.animationName === "bounceIn") {
+				if (e.animationName === styles.bounceIn) {
 					el.style.setProperty("opacity", "1", "");
-					el.classList.remove("bounceIn");
+					el.classList.remove(styles.bounceIn);
 					el.style.setProperty("animation-delay", "", "");
 				}
 			});
@@ -173,8 +171,8 @@ export default function SectionMe() {
 	};
 
 	return (
-		<section id="me">
-			<div className="content">
+		<section className={styles.me} id="me">
+			<div className={styles.content}>
 				<h1 className="spanText">
 					<span>H</span>
 					<span>o</span>
@@ -219,13 +217,14 @@ export default function SectionMe() {
 				</a>
 			</div>
 			<div
+				className={styles.hoverelement}
 				id="hoverelement"
 				onClick={avatarClick}
 				onMouseOver={setFastNoiseStep}
 				onMouseLeave={setSlowNoiseStep}
 			></div>
 
-			<div ref={avatarRef} id="avatar">
+			<div ref={avatarRef} className={styles.avatar} id="avatar">
 				<Avatar />
 			</div>
 

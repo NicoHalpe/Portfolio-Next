@@ -1,24 +1,27 @@
 import React, { useEffect, useRef } from "react";
-/* import "./SectionSkills.css"; */
 import useIntersectionObserver from "./../hooks/useIntersectionObserver";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 
+import styles from "./SectionSkills.module.css";
+
 export default function SectionSkills() {
 	const ref = useRef();
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
-	/* useEffect(() => {
-		let tilt = document.createElement("script");
-		tilt.src = "tilt.min.js";
-		document.head.appendChild(tilt);
-	}, []); */
+	const [visible, setVisible] = React.useState(false);
 
 	useEffect(() => {
-		if (onScreen) ref.current.classList.add("visible");
+		if (onScreen) {
+			setVisible(true);
+		}
 	}, [onScreen]);
 
 	return (
-		<section id="skills" ref={ref}>
+		<section
+			className={styles.skills + (visible ? ` ${styles.visible}` : "")}
+			id="skills"
+			ref={ref}
+		>
 			<h2 className="spanText">
 				<span>H</span>
 				<span>a</span>
@@ -32,7 +35,7 @@ export default function SectionSkills() {
 				<span>e</span>
 				<span>s</span>
 			</h2>
-			<div className="cards">
+			<div className={styles.cards}>
 				<Card
 					name={"back"}
 					title={"Back-end Developer"}
@@ -116,25 +119,25 @@ export default function SectionSkills() {
 
 const Card = ({ name, title, lenguajes, herramientas }) => {
 	return (
-		<Tilt className="card">
-			<div className="header">
+		<Tilt className={styles.card}>
+			<div className={styles.header}>
 				<Image
 					src={`/img/${name}.svg`}
 					alt={name + " logo"}
 					title={name + " logo"}
 					height={52}
 					width={52}
-					className="card-icon"
+					className={styles["card-icon"]}
 				/>
 				<h3>{title}</h3>
 			</div>
 
-			<div className="languages">
+			<div className={styles.languages}>
 				<h4>Lenguajes</h4>
 				<p>{lenguajes.join(", ")}</p>
 			</div>
 
-			<div className="tools">
+			<div className={styles.tools}>
 				<h4>Herramientas</h4>
 				<ul>
 					{herramientas.map((herramienta, index) => {

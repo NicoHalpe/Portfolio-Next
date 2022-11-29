@@ -1,11 +1,7 @@
 import type { AppProps } from "next/app";
 
 import "../styles/globals.css";
-import "../components/SectionAbout.css";
-import "../components/SectionContact.css";
-import "../components/SectionMe.css";
-import "../components/SectionProyects.css";
-import "../components/SectionSkills.css";
+
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {

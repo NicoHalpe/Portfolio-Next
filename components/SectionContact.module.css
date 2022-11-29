@@ -1,42 +1,42 @@
-#contact {
+.contact {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-#contact .content {
+.contact .content {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	gap: 4vw;
 }
 
-#contact h2 {
+.contact h2 {
 	font-size: clamp(2rem, 6vw, 4.5rem);
 	color: var(--color-accent);
 	margin-bottom: 5vh;
 }
 
-#contact .form {
+.contact .form {
 	display: flex;
 	flex-direction: column;
 	width: 60%;
 	gap: 15px;
 }
 
-#contact .form .col {
+.contact .form .col {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
 }
 
-#contact .form .col input {
+.contact .form .col input {
 	width: 100%;
 }
 
-#contact .form input,
-#contact .form textarea {
+.contact .form input,
+.contact .form textarea {
 	outline: none;
 	border: none;
 	background-color: var(--form-background-color);
@@ -46,11 +46,11 @@
 	color: var(--form-text-color);
 }
 
-#contact .form textarea {
+.contact .form textarea {
 	resize: none;
 }
 
-#contact button {
+.contact button {
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
 	width: fit-content;
 	border-radius: 5px;
@@ -64,47 +64,47 @@
 	margin-top: 1vh;
 }
 
-#contact button:hover,
-#contact button:focus {
+.contact button:hover,
+.contact button:focus {
 	color: var(--button-focus-text-color);
 	box-shadow: inset 300px 0 0 0 var(--color-accent);
 	outline: none;
 }
 
-#contact .socials {
+.contact .socials {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-#contact .socials .row {
+.contact .socials .row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	gap: 10px;
 }
 
-#contact .socials .row span {
+.contact .socials .row span {
 	text-decoration: none;
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
 	color: var(--text-color);
 }
 
-#contact .socials .row {
+.contact .socials .row {
 	text-decoration: none;
 }
 
-#contact .socials .row:hover {
+.contact .socials .row:hover {
 	transform: scale(1.05);
 }
 
-#contact .socials .row svg {
+.contact .socials .row svg {
 	fill: var(--text-color);
 	width: clamp(30px, 5vw, 50px);
 	height: clamp(30px, 5vw, 50px);
 }
 
-#contact .form-submit-wrapper {
+.contact .form-submit-wrapper {
 	position: fixed;
 	bottom: 3vh;
 	width: 100%;
@@ -115,7 +115,7 @@
 	place-items: center;
 }
 
-#contact .form-submit {
+.contact .form-submit {
 	width: 40%;
 	height: 4vh;
 	background-color: #d4edda;
@@ -127,31 +127,31 @@
 	border-radius: 5px;
 }
 
-#contact .form-submit-wrapper.leave {
+.contact .form-submit-wrapper.leave {
 	visibility: visible;
 	animation: leave 0.8s ease-out;
 }
 
-#contact .form-submit-wrapper.visible {
+.contact .form-submit-wrapper.visible {
 	visibility: visible;
 	animation: enter-bottom 0.8s ease-out;
 }
 
 @media only screen and (max-width: 1000px) {
-	#contact {
+	.contact {
 		margin-top: 5vh;
 	}
 
-	#contact .content {
+	.contact .content {
 		flex-direction: column;
 		align-items: flex-start;
 	}
 
-	#contact .form {
+	.contact .form {
 		width: 100%;
 	}
 
-	#contact .form-submit {
+	.contact .form-submit {
 		width: 80%;
 		height: 4vh;
 		background-color: #d4edda;
@@ -161,5 +161,27 @@
 		align-items: center;
 		justify-content: center;
 		border-radius: 5px;
+	}
+}
+
+@keyframes enter-bottom {
+	from {
+		opacity: 0;
+		transform: translateY(20vw);
+	}
+	to {
+		opacity: inherit;
+	}
+}
+@keyframes leave {
+	from {
+		opacity: 1;
+	}
+	100% {
+		visibility: collapse;
+	}
+	to {
+		opacity: 0;
+		transform: translateY(20vw);
 	}
 }

@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from "react";
-/* import "./SectionContact.css"; */
 import useIntersectionObserver from './../hooks/useIntersectionObserver';
+
+import styles from "./SectionContact.module.css";
 
 export default function SectionContact() {
 	const ref = useRef();
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
 	useEffect(() => {
-		if (onScreen) ref.current.classList.add("visible");
+		if (onScreen) ref.current.classList.add(styles.visible);
 	}, [onScreen]);
 
 	useEffect(() => {
@@ -22,12 +23,12 @@ export default function SectionContact() {
 			})
 				.then(() => {
 					form.reset();
-					document.querySelector(".form-submit-wrapper").classList.add("visible");
+					document.querySelector(".form-submit-wrapper").classList.add(styles.visible);
 					setTimeout(() => {
-						document.querySelector(".form-submit-wrapper").classList.remove("visible");
-						document.querySelector(".form-submit-wrapper").classList.add("leave");
+						document.querySelector(".form-submit-wrapper").classList.remove(styles.visible);
+						document.querySelector(".form-submit-wrapper").classList.add(styles.leave);
 						setTimeout(() => {
-							document.querySelector(".form-submit-wrapper").classList.remove("leave");
+							document.querySelector(".form-submit-wrapper").classList.remove(styles.leave);
 						}, 800);
 					}, 3000);
 				})
@@ -38,7 +39,7 @@ export default function SectionContact() {
 	}, []);
 
 	return (
-		<section id="contact" ref={ref}>
+		<section id="contact" className={styles.contact} ref={ref}>
 			<h2 className="spanText">
 				<span>C</span>
 				<span>o</span>
@@ -51,9 +52,9 @@ export default function SectionContact() {
 				<span>m</span>
 				<span>e</span>
 			</h2>
-			<div className="content">
-				<form id="contact-form" className="form" name="contact" netlify="">
-					<div className="col">
+			<div className={styles.content}>
+				<form id="contact-form" className={styles.form} name="contact" netlify="">
+					<div className={styles.col}>
 						<input placeholder="Nombre" type="text" name="nombre" id="nombre" />
 						<input placeholder="Email" type="email" name="email" id="email" />
 					</div>
@@ -61,12 +62,12 @@ export default function SectionContact() {
 					<textarea placeholder="Mensaje" name="mensaje" id="mensaje" rows="8"></textarea>
 					<button type="submit">¡Enviar!</button>
 				</form>
-				<div className="socials">
+				<div className={styles.socials}>
 					<a
 						href="https://www.linkedin.com/in/nicolas-halperin/"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="row"
+						className={styles.row}
 						title="linkedin de nicolas halperin"
 					>
 						<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +90,7 @@ export default function SectionContact() {
 						href="https://github.com/NicoHalpe"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="row"
+						className={styles.row}
 						title="github de nicolas halperin"
 					>
 						<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +105,7 @@ export default function SectionContact() {
 						href="https://discord.com/users/463392417782038569"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="row"
+						className={styles.row}
 						title="discord de nicolas halperin"
 					>
 						<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +120,7 @@ export default function SectionContact() {
 						href="https://www.instagram.com/nico_halpe/"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="row"
+						className={styles.row}
 						title="instagram de nicolas halperin"
 					>
 						<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +133,7 @@ export default function SectionContact() {
 					</a>
 					<a
 						href="mailto:nicohalpe05@gmail.com"
-						className="row"
+						className={styles.row}
 						target="_blank"
 						rel="noopener noreferrer"
 						title="mail de nicolas halperin"
@@ -147,7 +148,7 @@ export default function SectionContact() {
 					</a>
 					<a
 						href="https://join.skype.com/invite/hoBL2uXuDtuM"
-						className="row"
+						className={styles.row}
 						target="_blank"
 						rel="noopener noreferrer"
 						title="skype de nicolas halperin"
@@ -161,8 +162,8 @@ export default function SectionContact() {
 						<span aria-label="nico halperin">Nico Halperin</span>
 					</a>
 				</div>
-				<div className="form-submit-wrapper">
-					<div className="form-submit">Gracias por tu mensaje!</div>
+				<div className={styles['form-submit-wrapper']}>
+					<div className={styles['form-submit']}>Gracias por tu mensaje!</div>
 				</div>
 			</div>
 			<a className="scroll-up r" href="#me" title="volver al principio">

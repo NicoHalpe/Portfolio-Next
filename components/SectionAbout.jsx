@@ -1,30 +1,18 @@
-import Image from "next/image";
-import React, { useEffect, useRef } from "react";
-/* import "./SectionAbout.css"; */
+import React, { useRef } from "react";
 import useIntersectionObserver from "./../hooks/useIntersectionObserver";
 import Programming from "../public/img/programming.svg";
+
+import styles from "./SectionAbout.module.css";
 
 export default function SectionAbout() {
 	const ref = useRef();
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
-	useEffect(() => {
-		if (onScreen) ref.current.classList.add("visible");
-	}, [onScreen]);
-
 	return (
-		<section id="about" ref={ref}>
-			<div className="content">
-				<Programming id="programming-svg" aria-label="Foto decorativa" />
-				{/* <object
-					id="programming-svg"
-					type="image/svg+xml"
-					data="/img/programming.svg"
-					aria-label="Foto decorativa"
-				>
-					<Image height="300" width="300" src="/img/programming.svg" alt="Foto decorativa" />
-				</object> */}
-				<div className="text">
+		<section className={`${styles.about} ${onScreen ? styles.visible : ""}`} id="about" ref={ref}>
+			<div className={styles.content}>
+				<Programming className={styles['programming-svg']} id="programming-svg" aria-label="Foto decorativa" />
+				<div className={styles.text}>
 					<h2 className="spanText">
 						<span>S</span>
 						<span>o</span>

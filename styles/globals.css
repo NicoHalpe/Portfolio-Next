@@ -1,4 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap"); */
+@font-face {
+	font-family: Rubik;
+	src: url(https://fonts.gstatic.com/s/rubik/v21/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4iFV0U1.woff2) format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+  }
 
 * {
 	margin: 0;
@@ -175,107 +182,6 @@ body::-webkit-scrollbar {
 	}
 	100% {
 		transform: translateX(0);
-	}
-}
-
-@keyframes flip-in-ver-right {
-	0% {
-		transform: rotateY(-80deg);
-		opacity: 0;
-	}
-	100% {
-		transform: rotateY(0);
-		opacity: 1;
-	}
-}
-
-@keyframes rubberBand {
-	0% {
-		transform: scale3d(1, 1, 1);
-	}
-	30% {
-		transform: scale3d(1.25, 0.75, 1);
-	}
-	40% {
-		transform: scale3d(0.75, 1.25, 1);
-	}
-	50% {
-		transform: scale3d(1.15, 0.85, 1);
-	}
-	65% {
-		transform: scale3d(0.95, 1.05, 1);
-	}
-	75% {
-		transform: scale3d(1.05, 0.95, 1);
-	}
-	100% {
-		transform: scale3d(1, 1, 1);
-	}
-}
-@keyframes bounceIn {
-	80% {
-		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-	}
-	0% {
-		opacity: 0;
-		transform: scale3d(0.3, 0.3, 0.3);
-	}
-	20% {
-		transform: scale3d(1.1, 1.1, 1.1);
-	}
-	40% {
-		transform: scale3d(0.9, 0.9, 0.9);
-	}
-	60% {
-		opacity: 1;
-		transform: scale3d(1.03, 1.03, 1.03);
-	}
-	80% {
-		transform: scale3d(0.97, 0.97, 0.97);
-	}
-	100% {
-		opacity: 1;
-		transform: scale3d(1, 1, 1);
-	}
-}
-
-@keyframes enter-left {
-	from {
-		opacity: 0;
-		transform: translateX(-50vw);
-	}
-	to {
-		opacity: inherit;
-	}
-}
-@keyframes enter-right {
-	from {
-		opacity: 0;
-		transform: translateX(50vw);
-	}
-	to {
-		opacity: inherit;
-	}
-}
-@keyframes enter-bottom {
-	from {
-		opacity: 0;
-		transform: translateY(20vw);
-	}
-	to {
-		opacity: inherit;
-	}
-}
-@keyframes leave {
-	from {
-		opacity: 1;
-	}
-	100% {
-		visibility: collapse;
-	}
-	to {
-		opacity: 0;
-		transform: translateY(20vw);
 	}
 }
 @keyframes backforw {

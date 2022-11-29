@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-/* import "./SectionProyects.css"; */
 import useIntersectionObserver from "./../hooks/useIntersectionObserver";
+
+import styles from "./SectionProyects.module.css";
 
 export default function SectionProyects() {
 	const [originals, setOriginals] = useState([]);
@@ -14,7 +15,7 @@ export default function SectionProyects() {
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
 	useEffect(() => {
-		if (onScreen) ref.current.classList.add("visible");
+		if (onScreen) ref.current.classList.add(styles.visible);
 	}, [onScreen]);
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ export default function SectionProyects() {
 
 		const onMouseDown = (e) => {
 			e.path.forEach((element) => {
-				if (element.classList && element.classList.contains("card")) {
+				if (element.classList && element.classList.contains(styles.card)) {
 					const children = Array.prototype.slice.call(images.children);
 					const index = children.indexOf(element);
 					const dif = index - startCard;
@@ -49,12 +50,15 @@ export default function SectionProyects() {
 		images.addEventListener("mousedown", onMouseDown);
 
 		const handleCardClickPos = (dif) => {
-			const check = images.querySelectorAll(".card")[images.querySelectorAll(".card").length - 1];
+			console.log("click pos", dif);
+			const check = images.querySelectorAll(`.${styles.card}`)[
+				images.querySelectorAll(`.${styles.card}`).length - 1
+			];
 			let currentOriginalPos =
 				originals.findIndex(
 					(original) =>
-						original.querySelector(".card-title").innerHTML ===
-						check.querySelector(".card-title").innerHTML
+						original.querySelector(`.${styles["card-title"]}`).innerHTML ===
+						check.querySelector(`.${styles["card-title"]}`).innerHTML
 				) + 1;
 			if (currentOriginalPos > originals.length - 1) {
 				currentOriginalPos = currentOriginalPos - originals.length;
@@ -72,8 +76,8 @@ export default function SectionProyects() {
 					currentOriginalPos = currentOriginalPos - originals.length;
 				}
 			}
-			images.children[currentCard].classList.add("visible");
-			images.children[currentCard - dif].classList.remove("visible");
+			images.children[currentCard].classList.add(styles.visible);
+			images.children[currentCard - dif].classList.remove(styles.visible);
 
 			setTimeout(() => {
 				images.style.setProperty("pointer-events", "all");
@@ -88,12 +92,12 @@ export default function SectionProyects() {
 
 		const handleCardClickNeg = (dif) => {
 			let currentCard = startCard;
-			const check = images.querySelectorAll(".card")[0];
+			const check = images.querySelectorAll(`.${styles.card}`)[0];
 			let currentOriginalNeg =
 				originals.findIndex(
 					(original) =>
-						original.querySelector(".card-title").innerHTML ===
-						check.querySelector(".card-title").innerHTML
+						original.querySelector(`.${styles["card-title"]}`).innerHTML ===
+						check.querySelector(`.${styles["card-title"]}`).innerHTML
 				) - 1;
 			if (currentOriginalNeg < 0) {
 				currentOriginalNeg = originals.length - 1;
@@ -101,8 +105,8 @@ export default function SectionProyects() {
 			images.style.setProperty("pointer-events", "none");
 			currentCard -= dif;
 
-			images.children[currentCard + dif].classList.remove("visible");
-			images.children[currentCard].classList.add("visible");
+			images.children[currentCard + dif].classList.remove(styles.visible);
+			images.children[currentCard].classList.add(styles.visible);
 
 			for (var i = 0; i < dif; i++) {
 				const clone = originals[currentOriginalNeg].cloneNode(true);
@@ -181,7 +185,7 @@ export default function SectionProyects() {
 	}, [images, cardWidth, mobileDif]);
 
 	useEffect(() => {
-		setImages(document.querySelector("#proyects .cards"));
+		setImages(document.querySelector(`#proyects .${styles.cards}`));
 
 		if (window.innerWidth < 1000) {
 			setCardWidth(window.innerWidth * 0.8 + 10);
@@ -190,9 +194,9 @@ export default function SectionProyects() {
 			setCardWidth(460);
 			setMobileDif(0);
 		}
-		document.querySelectorAll("#proyects .card").forEach((el) => {
+		document.querySelectorAll(`#proyects .${styles.card}`).forEach((el) => {
 			const cl = el.cloneNode(true);
-			cl.classList.remove("visible");
+			cl.classList.remove(styles.visible);
 			setOriginals((old) => [...old, cl]);
 		});
 
@@ -210,7 +214,7 @@ export default function SectionProyects() {
 	}, [images]);
 
 	return (
-		<section id="proyects" ref={ref}>
+		<section id="proyects" className={styles.proyects} ref={ref}>
 			<h2 className="spanText">
 				<span>P</span>
 				<span>r</span>
@@ -223,137 +227,115 @@ export default function SectionProyects() {
 				<span>s</span>
 			</h2>
 
-			<div id="carrousel" className="carrousel">
-				<div className="cards" style={{ transform: "translate(-920px)" }}>
-					<div className="card">
-						<div className="card-image-container">
-							<a
-								className="card-image-link"
-								href="https://kubikware.netlify.app"
-								target="_blank"
-								rel="noopener noreferrer"
-								title="link a kubikware por nicolas halperin"
-							>
-								<Image
-									width={460}
-									height={300}
-									className="card-image"
-									src="/img/kubikware-remake.png"
-									style={{ objectPosition: 0 }}
-									alt="kubikware por nicolas halperin"
-								/>
-							</a>
-						</div>
-						<h3 className="card-title">Kubikware</h3>
-						<p className="card-description">Recreación de la página de kubikware.</p>
-						<div className="card-stacks">
-							<div className="chip">#HTML</div>
-							<div className="chip">#CSS</div>
-							<div className="chip">#JS</div>
-						</div>
-					</div>
-					<div className="card">
-						<div className="card-image-container">
-							<a
-								className="card-image-link"
-								href="https://play.google.com/store/apps/details?id=com.drogebot.rocketleaguestats"
-								target="_blank"
-								rel="noopener noreferrer"
-								title="link a rocket stats por nicolas halperin"
-							>
-								<Image
-									width={460}
-									height={300}
-									className="card-image"
-									src="/img/rocket stats.png"
-									alt="rocket stats por nicolas halperin"
-								/>
-							</a>
-						</div>
-						<h3 className="card-title">RL Stats</h3>
-						<p className="card-description">
-							Una aplicación móvil que da acceso a cualquier persona a sus rangos de Rocket League
-							desde su teléfono. Esta aplicación está pensada para todos los jugadores de Rocket
-							League, aqui podran seguir su progreso, encontrar sus rangos, sus estadisticas y sus
-							partidos jugados. La solución consiste en 4 páginas, un inicio de sesión, una pagina
-							principal, una de estadisticas y una de partidos.
-						</p>
-						<div className="card-stacks">
-							<div className="chip">#Flutter</div>
-							<div className="chip">#Dart</div>
-							<div className="chip">#RestAPI</div>
-						</div>
-					</div>
-					<div className="card visible">
-						<div className="card-image-container">
-							<a
-								className="card-image-link"
-								href="https://infocusapp.netlify.app"
-								target="_blank"
-								rel="noopener noreferrer"
-								title="link a infocus por nicolas halperin y 3 más"
-							>
-								<Image
-									width={460}
-									height={300}
-									className="card-image"
-									src="/img/infocus.png"
-									alt="infocus por nicolas halperin y 3 más"
-								/>
-							</a>
-						</div>
-						<h3 className="card-title">InFocus</h3>
-						<p className="card-description">
-							Una página web que brinda herramientas de ayuda a jóvenes y adultos en etapa laboral
+			<div id="carrousel" className={styles.carrousel}>
+				<div className={styles.cards} style={{ transform: "translate(-920px)" }}>
+					<Project
+						visible={startCard === 1}
+						title="Kubikware"
+						description="Recreación de la página de kubikware."
+						stacks={["HTML", "CSS", "JS"]}
+						link="https://kubikware.netlify.app/"
+						image={"/img/kubikware-remake.png"}
+					/>
+					<Project
+						visible={startCard === 2}
+						title="RL Stats"
+						description="Una aplicación móvil que da acceso a cualquier persona a sus rangos de Rocket League
+						desde su teléfono. Esta aplicación está pensada para todos los jugadores de Rocket
+						League, aqui podran seguir su progreso, encontrar sus rangos, sus estadisticas y sus
+						partidos jugados. La solución consiste en 4 páginas, un inicio de sesión, una pagina
+						principal, una de estadisticas y una de partidos."
+						stacks={["Flutter", "Dart", "RestAPI"]}
+						link="https://play.google.com/store/apps/details?id=com.drogebot.rocketleaguestats"
+						image={"/img/rocket stats.png"}
+					/>
+					<Project
+						visible={startCard === 3}
+						title="Satellites On Fire"
+						description="Satellites On Fire es un sistema de detección en tiempo real de focos de calor, los cuales contemplan distintos niveles de probabilidad de ser incendios. El usuario puede observarlos en tiempo real, teniendo también la posibilidad de ver focos pasados. Adicionalmente, brindamos un sistema de alertas para que los usuarios puedan recibir notificaciones de los últimos focos detectados en sus zonas, permitiendoles actuar a tiempo, reduciendo costos causados por la propagación de los incendios."
+						stacks={["Front-end dev", "React", "Material-UI"]}
+						link="https://www.satellitesonfire.com/"
+						image={"/img/sof.png"}
+					/>
+					<Project
+						visible={startCard === 4}
+						title="InFocus"
+						description="Una página web que brinda herramientas de ayuda a jóvenes y adultos en etapa laboral
 							con déficit de atención. Se brindan herramientas tales como recordatorios,
 							organizadores, una sección de estudio (donde puedas establecer un tiempo de trabajo y
 							te dé tiempos de recreo en proporción al trabajo y que te vaya guiando para que puedas
 							lograr un estudio efectivo), una sección de ejercicios de relajación y por último una
 							sección de notas para cuando el usuario esté en la escuela/trabajo, pueda tomar sus
-							apuntes y tener todo organizado.
-						</p>
-						<div className="card-stacks">
-							<div className="chip">#React</div>
-							<div className="chip">#NodeJs</div>
-							<div className="chip">#Express</div>
-						</div>
-					</div>
-					<div className="card">
-						<div className="card-image-container">
-							<a
-								className="card-image-link"
-								href="/files/CalcularFechas.apk"
-								download
-								title="link de descarga de calcular fechas por nicolas halperin"
-							>
-								<Image
-									width={460}
-									height={300}
-									className="card-image"
-									src="/img/calcular-fechas.png"
-									alt="calcular fechas por nicolas halperin"
-								/>
-							</a>
-						</div>
-						<h3 className="card-title">Calcular Fechas</h3>
-						<p className="card-description">
-							Una aplicación móvil para ver tus eventos de una forma más divertida. Podrás crear 2
+							apuntes y tener todo organizado."
+						stacks={["React", "NodeJs", "Express"]}
+						link="https://infocusapp.netlify.app"
+						image={"/img/infocus.png"}
+					/>
+					<Project
+						visible={startCard === 5}
+						title="Calcular Fechas"
+						description="Una aplicación móvil para ver tus eventos de una forma más divertida. Podrás crear 2
 							tipos de eventos, pasados o futuros. Para los eventos futuros, podrás ponerle un
 							título y activar un recordatorio para el momento del evento o para un tiempo antes.
 							Cuando ya lo tengas creado, podrás acceder a una pantalla donde hay una cuenta
 							regresiva para el evento. Para los eventos pasados, vas a poder ver el tiempo que pasó
 							desde la fecha indicada de una manera distinta. Podrás ver la cantidad exacta que pasó
 							de cada medida de tiempo, por ejemplo, te dirá la cantidad de segundos que pasaron
-							desde que naciste.
-						</p>
-						<div className="card-stacks">
-							<div className="chip">#Android</div>
-							<div className="chip">#Kotlin</div>
-							<div className="chip">#Native App</div>
-						</div>
-					</div>
+							desde que naciste."
+						stacks={["Android", "Kotlin", "Native App"]}
+						link="/files/CalcularFechas.apk"
+						download={true}
+						image={"/img/calcular-fechas.png"}
+					/>
+					<Project
+						visible={startCard === 6}
+						title="Wordle Infinito"
+						description="Clásico juego de Wordle pero sacando la necesidad de esperar 24 horas para poder jugar con otra palabra."
+						stacks={["HTML", "CSS", "JS"]}
+						link="https://wordle.nicohalpe.com.ar/"
+						image={"/img/wordle.png"}
+					/>
+
+					{/* <Project title="" description="" stacks={["", "", ""]} link="" image={"/img/.png"} /> */}
 				</div>
 			</div>
 		</section>
+	);
+}
+
+function Project({ title, description, stacks, image, link, download, visible }) {
+	return (
+		<div className={styles.card + (visible ? ` ${styles.visible}` : "")}>
+			<div className={styles["card-image-container"]}>
+				<a
+					className={styles["card-image-link"]}
+					href={link}
+					download={download}
+					target="_blank"
+					rel="noopener noreferrer"
+					title={`link ${download ? "de descarga" : ""} a ${title} por nicolas halperin`}
+				>
+					<Image
+						width={460}
+						height={300}
+						className={styles["card-image"]}
+						src={image}
+						style={{
+							objectPosition: 0,
+						}}
+						alt={`${title} por nicolas halperin`}
+					/>
+				</a>
+			</div>
+			<h3 className={styles["card-title"]}>{title}</h3>
+			<p className={styles["card-description"]}>{description}</p>
+			<div className={styles["card-stacks"]}>
+				{stacks.map((stack) => (
+					<div className={styles.chip} key={stack}>
+						#{stack}
+					</div>
+				))}
+			</div>
+		</div>
 	);
 }
