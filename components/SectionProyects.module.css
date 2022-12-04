@@ -74,15 +74,19 @@
 }
 
 .proyects .card .card-image-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
 }
 
 .proyects .card .card-image {
 	width: 100%;
-	height: 100%;
+	height: fit-content;
 	transition: 0.5s;
 	object-fit: cover;
+	border-radius: 10px;
 }
 
 .proyects .card .card-image:hover {
