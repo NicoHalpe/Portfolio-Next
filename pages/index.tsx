@@ -58,21 +58,24 @@ export default function Home() {
 
 				<link rel="canonical" href="https://nicohalpe.com.ar/" />
 
-				<script type="application/ld+json">
-					{`{
-            "@context": "http://schema.org",
-            "@type": "Person",
-            "name": "Nicolas Halperin",
-            "url": "https://nicohalpe.com.ar",
-            "sameAs": [
-              "https://www.linkedin.com/in/nicolas-halperin/",
-              "https://twitter.com/nico_halpe",
-              "https://facebook.com/nico.halperin.7",
-              "https://www.instagram.com/nico_halpe/",
-              "https://github.com/NicoHalpe"
-            ]
-			    }`}
-				</script>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: `{
+					"@context": "http://schema.org",
+					"@type": "Person",
+					"name": "Nicolas Halperin",
+					"url": "https://nicohalpe.com.ar",
+					"sameAs": [
+						"https://www.linkedin.com/in/nicolas-halperin/",
+						"https://twitter.com/nico_halpe",
+						"https://www.facebook.com/nicolas.halperin/",
+						"https://www.instagram.com/nico_halpe/",
+						"https://github.com/NicoHalpe"
+					]
+			    }`,
+					}}
+				></script>
 
 				<link
 					rel="shortcut icon"
