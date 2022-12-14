@@ -132,7 +132,7 @@ export default function SectionContact() {
 						<span>nico_halpe</span>
 					</a>
 					<a
-						href="mailto:nicohalpe05@gmail.com"
+						href="mailto:nicolas.halperin5@gmail.com"
 						className={styles.row}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -144,7 +144,7 @@ export default function SectionContact() {
 								fill="inherit"
 							/>
 						</svg>
-						<span>nicohalpe05@gmail.com</span>
+						<span>nicolas.halperin5@gmail.com</span>
 					</a>
 					<a
 						href="https://join.skype.com/invite/hoBL2uXuDtuM"
