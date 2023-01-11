@@ -11,7 +11,11 @@ export default function SectionAbout() {
 	return (
 		<section className={`${styles.about} ${onScreen ? styles.visible : ""}`} id="about" ref={ref}>
 			<div className={styles.content}>
-				<Programming className={styles['programming-svg']} id="programming-svg" aria-label="Foto decorativa" />
+				<Programming
+					className={styles["programming-svg"]}
+					id="programming-svg"
+					aria-label="Foto decorativa"
+				/>
 				<div className={styles.text}>
 					<h2 className="spanText">
 						<span>S</span>
@@ -24,15 +28,17 @@ export default function SectionAbout() {
 						<span>í</span>
 					</h2>
 					<p>
-						Soy Nicolás Halperin, tengo 17 años y desde hace 4 que me estoy adentrando en el mundo de la
-						programación y el desarrollo. Desde chico que estoy interesado en todo el tema de la
-						tecnología, siempre buscando soluciones para automatizar tareas de manera simple. Con
+						Soy Nicolás Halperin, tengo 17 años y desde hace 4 que me estoy adentrando en el mundo
+						de la programación y el desarrollo. Desde chico que estoy interesado en todo el tema de
+						la tecnología, siempre buscando soluciones para automatizar tareas de manera simple. Con
 						este incentivo comencé a programar, haciendo aplicaciones básicas que den solución a
 						problemas de la vida cotidiana. Con el tiempo fui aprendiendo nuevos lenguajes y
 						mejorando mis prácticas, por lo que en este momento puedo crear soluciones más
 						complejas, como páginas web, aplicaciones para Windows o móviles, APIs y mucho más. A
-						nivel académico, actualmente estoy cursando 5º año de la secundaria con Orientación en
-						Tecnologías de la Información y la Comunicación en la Escuela ORT.
+						nivel académico, me egresé de la Escuela ORT con honores, recibiendo el titulo de
+						Bachillerato con Orientación en Tecnologías de la Información y la Comunicación.
+						Actualmente estoy empezando la Licentura en Ciencias de la Computación en la Universidad
+						de Buenos Aires.
 					</p>
 				</div>
 			</div>
