@@ -121,17 +121,13 @@ export default function SectionProyects() {
 		images.addEventListener("swiped", onSwipe);
 
 		const onMouseDown = (e) => {
-			e.path.forEach((element) => {
-				if (element.classList && element.classList.contains(styles.card)) {
-					const children = Array.prototype.slice.call(images.children);
-					const index = children.indexOf(element);
-					const dif = index - startCard;
-					if (dif > 0) handleCardClickPos(dif);
-					else if (dif < 0) handleCardClickNeg(-dif);
-				}
-			});
+			const children = Array.prototype.slice.call(images.children);
+			const index = children.indexOf(e.target);
+			const dif = index - startCard;
+			if (dif > 0) handleCardClickPos(dif);
+			else if (dif < 0) handleCardClickNeg(-dif);
 		};
-		images.addEventListener("mousedown", onMouseDown);
+		images.addEventListener("click", onMouseDown);
 
 		const onResize = (e) => {
 			let cw;
@@ -340,6 +336,7 @@ function Project({ title, description, stacks, image, link, download, visible })
 							objectPosition: 0,
 						}}
 						alt={`${title} por nicolas halperin`}
+						priority={false}
 					/>
 				</a>
 			</div>
