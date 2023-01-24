@@ -74,6 +74,7 @@
 }
 
 .proyects .card .card-image-link {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -89,6 +90,7 @@
 	border-radius: 10px;
 }
 
+.card-image:has(+ .hover:hover),
 .proyects .card .card-image:hover {
 	transform: scale(1.2);
 }
@@ -131,6 +133,37 @@
 	font-family: Verdana, sans-serif;
 	white-space: nowrap;
 	font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.hover {
+	opacity: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transition: all 0.5s;
+	display: grid;
+	place-items: center;
+}
+
+.hover:hover,
+.card-image:hover + .hover {
+	background-color: rgba(0, 0, 0, 0.7);
+	opacity: 1;
+}
+
+.hover-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 1.4rem;
+}
+
+.hover-icon {
+	width: 25px;
+	height: 25px;
 }
 
 @media only screen and (max-width: 1000px) {

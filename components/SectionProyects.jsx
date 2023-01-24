@@ -57,6 +57,7 @@ export default function SectionProyects() {
 
 	const handleCardClickNeg = (dif) => {
 		let currentCard = startCard;
+		if (!images.children[currentCard - dif]) return;
 		const check = images.querySelectorAll(`.${styles.card}`)[0];
 		let currentOriginalNeg =
 			originals.findIndex(
@@ -121,6 +122,7 @@ export default function SectionProyects() {
 		images.addEventListener("swiped", onSwipe);
 
 		const onMouseDown = (e) => {
+			console.log(e.target.classList);
 			const children = Array.prototype.slice.call(images.children);
 			const index = children.indexOf(e.target);
 			const dif = index - startCard;
@@ -338,6 +340,45 @@ function Project({ title, description, stacks, image, link, download, visible })
 						alt={`${title} por nicolas halperin`}
 						priority={false}
 					/>
+					<div className={styles.hover}>
+						{download ? (
+							<div className={styles["hover-content"]}>
+								<span>Descargar</span>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									className={styles["hover-icon"]}
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+									/>
+								</svg>
+							</div>
+						) : (
+							<div className={styles["hover-content"]}>
+								<span>Abrir</span>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="currentColor"
+									className={styles["hover-icon"]}
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+									/>
+								</svg>
+							</div>
+						)}
+					</div>
 				</a>
 			</div>
 			<h3 className={styles["card-title"]}>{title}</h3>
