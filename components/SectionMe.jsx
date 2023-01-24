@@ -13,6 +13,8 @@ export default function SectionMe() {
 	const avatarRef = React.useRef(null);
 	const [avatar, setAvatar] = React.useState(null);
 
+	const [light, setLight] = React.useState(false);
+
 	function map(n, start1, end1, start2, end2) {
 		return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
 	}
@@ -130,6 +132,9 @@ export default function SectionMe() {
 	}, [avatarRef, avatar]);
 
 	useEffect(() => {
+		const theme = document.documentElement.getAttribute("theme");
+		setLight(theme === "dark" ? false : true);
+
 		[...document.querySelectorAll(`#me .${styles.content} h1 span`)].map((el, i) => {
 			el.style.setProperty("animation-delay", `${i * 50}ms`, "");
 			el.classList.add(styles.bounceIn);
@@ -168,6 +173,7 @@ export default function SectionMe() {
 			"--color-accent"
 		);
 		avatar.querySelector("path").setAttribute("fill", colorAccent);
+		setLight(theme === "dark" ? true : false);
 	};
 
 	return (
@@ -230,7 +236,7 @@ export default function SectionMe() {
 			></div>
 
 			<div ref={avatarRef} className={styles.avatar} id="avatar">
-				<Avatar />
+				<Avatar light={light} />
 			</div>
 
 			{/* <object
