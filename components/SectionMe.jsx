@@ -132,8 +132,8 @@ export default function SectionMe() {
 	}, [avatarRef, avatar]);
 
 	useEffect(() => {
-		const theme = document.documentElement.getAttribute("theme");
-		setLight(theme === "dark" ? false : true);
+		/* const theme = document.documentElement.getAttribute("theme");
+		setLight(theme === "dark" ? false : true); */
 
 		[...document.querySelectorAll(`#me .${styles.content} h1 span`)].map((el, i) => {
 			el.style.setProperty("animation-delay", `${i * 50}ms`, "");
