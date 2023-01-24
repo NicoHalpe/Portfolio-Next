@@ -212,9 +212,14 @@ export default function SectionMe() {
 					<span>r</span>
 				</h1>
 				<p>Automatizando el mundo</p>
-				<a href="#contact" title="ir a contacto">
-					Contactame
-				</a>
+				<div className={styles.buttons}>
+					<a href="#contact" title="ir a contacto">
+						Contactame
+					</a>
+					<a href="/Nicolas Halperin CV.pdf" download={true} title="ir a contacto">
+						Descargar CV
+					</a>
+				</div>
 			</div>
 			<div
 				className={styles.hoverelement}
