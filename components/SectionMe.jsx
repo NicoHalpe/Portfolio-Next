@@ -222,7 +222,7 @@ export default function SectionMe() {
 					<a href="#contact" title="ir a contacto">
 						Contactame
 					</a>
-					<a href="/Nicolas Halperin CV.pdf" download={true} title="ir a contacto">
+					<a href="/Nicolas Halperin CV.pdf" download={true} title="descargar cv">
 						Descargar CV
 					</a>
 				</div>
