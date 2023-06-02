@@ -175,7 +175,7 @@ export default function Avatar({ light }) {
 									id="Top/_Resources/Sunglasses"
 									fill="none"
 									transform="translate(62.000000, 85.000000)"
-									stroke-width="1"
+									strokeWidth="1"
 								>
 									<defs>
 										<filter

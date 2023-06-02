@@ -12,6 +12,7 @@
     "local": "npm run build && npm start"
   },
   "dependencies": {
+    "@formspree/react": "^2.4.1",
     "@georgedoescode/spline": "^1.0.1",
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.11.9",
