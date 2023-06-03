@@ -13,7 +13,7 @@ export default function SectionContact() {
 	const [formState, submitForm] = useForm(process.env.NEXT_PUBLIC_FORM || "xnqyknlo");
 
 	useEffect(() => {
-		if (formState.succeeded)
+		if (!formState.succeeded) return;
 		formRef.current.reset();
 		submitMsgRef.current.classList.add(styles.visible);
 		setTimeout(() => {
@@ -71,12 +71,7 @@ export default function SectionContact() {
 				<span>e</span>
 			</h2>
 			<div className={styles.content}>
-				<form
-					ref={formRef}
-					className={styles.form}
-					name="contact"
-					onSubmit={submitForm}
-				>
+				<form ref={formRef} className={styles.form} name="contact" onSubmit={submitForm}>
 					<div className={styles.col}>
 						<input placeholder="Nombre" type="text" name="nombre" id="nombre" />
 						<ValidationError prefix="Nombre" field="nombre" errors={formState.errors} />
