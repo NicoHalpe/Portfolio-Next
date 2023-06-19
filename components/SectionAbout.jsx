@@ -28,7 +28,7 @@ export default function SectionAbout() {
 						<span>í</span>
 					</h2>
 					<p>
-						Soy <b>Nicolás Halperin</b>, tengo 17 años y desde hace 4 que me estoy adentrando en el
+						Soy <b>Nicolás Halperin</b>, tengo 18 años y desde hace 5 que me estoy adentrando en el
 						mundo de la programación y el desarrollo de manera autodidácta. Desde chico que estoy interesado en todo el
 						tema de la tecnología, siempre buscando soluciones para automatizar tareas de manera
 						simple. Con este incentivo comencé a programar, haciendo aplicaciones básicas que den
