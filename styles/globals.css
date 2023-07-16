@@ -33,6 +33,7 @@ html[theme="light"] {
 	--color-accent: #229bdd;
 	--text-color: black;
 	--subtitle-color: rgba(0, 0, 0, 0.7);
+	--paragraph-color: rgba(0, 0, 0, 0.8);
 	--button-focus-text-color: white;
 	--form-background-color: #dfdfdf;
 	--form-text-color: #4e4e4e;
@@ -45,6 +46,7 @@ html[theme="dark"] {
 	--color-accent: #65c9ff;
 	--text-color: white;
 	--subtitle-color: rgba(255, 255, 255, 0.7);
+	--paragraph-color: rgba(255, 255, 255, 0.8);
 	--button-focus-text-color: black;
 	--form-background-color: #2b2b2b;
 	--form-text-color: #dddddd;
