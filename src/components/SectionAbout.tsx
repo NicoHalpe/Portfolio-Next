@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
-import Programming from "../public/img/programming.svg";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import Programming from "../../public/img/programming.svg";
 
 import styles from "./SectionAbout.module.css";
-import useBouncingAnimation from "../hooks/useBouncingAnimation";
+import useBouncingAnimation from "../../hooks/useBouncingAnimation";
 
 export default function SectionAbout() {
 	const ref = useRef<HTMLElement>(null);
@@ -21,7 +21,7 @@ export default function SectionAbout() {
 					aria-label="Foto decorativa"
 				/>
 				<div className={styles.text}>
-					<h2 className="spanText" ref={titleRef}>
+					<h2 className="spanText" ref={titleRef} aria-label="Sobre mí">
 						<span>S</span>
 						<span>o</span>
 						<span>b</span>

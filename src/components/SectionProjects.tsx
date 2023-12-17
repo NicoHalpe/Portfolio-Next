@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { SwipeEventData, useSwipeable } from "react-swipeable";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
-import styles from "./SectionProyects.module.css";
-import useBouncingAnimation from "../hooks/useBouncingAnimation";
+import styles from "./SectionProjects.module.css";
+import useBouncingAnimation from "../../hooks/useBouncingAnimation";
+import projects from "../constants/projects";
 
 type SwipeEvent = CustomEvent<{
 	// swipe direction
@@ -22,12 +23,24 @@ type SwipeEvent = CustomEvent<{
 	yEnd: number;
 }>;
 
-export default function SectionProyects() {
+type Project = {
+	title: string;
+	description: string;
+	stacks: string[];
+	image: string;
+	link: string;
+	download?: boolean;
+};
+
+export default function SectionProjects() {
 	const [originals, setOriginals] = useState<HTMLDivElement[]>([]);
 	const [images, setImages] = useState<HTMLDivElement>();
+	const [dots, setDots] = useState<HTMLDivElement>();
 	const [startCard, setStartCard] = useState(1);
 	const [cardWidth, setCardWidth] = useState(0);
 	const [mobileDif, setMobileDif] = useState(0);
+	const [animating, setAnimating] = useState(false);
+
 	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
@@ -35,7 +48,10 @@ export default function SectionProyects() {
 	useBouncingAnimation(titleRef);
 
 	const handleCardClickPos = (dif: number) => {
-		if (!images) return;
+		if (!images || animating) return;
+
+		setAnimating(true);
+
 		const check = images.querySelectorAll(`.${styles.card}`)[
 			images.querySelectorAll(`.${styles.card}`).length - 1
 		];
@@ -72,14 +88,19 @@ export default function SectionProyects() {
 			}
 			images.style.transitionDuration = "0s";
 			images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
+
+			setAnimating(false);
 		}, 500);
 	};
 
 	const handleCardClickNeg = (dif: number) => {
-		if (!images) return;
+		if (!images || animating) return;
 
 		let currentCard = startCard;
 		if (!images.children[currentCard - dif]) return;
+
+		setAnimating(true);
+
 		const check = images.querySelectorAll(`.${styles.card}`)[0];
 		let currentOriginalNeg =
 			originals.findIndex(
@@ -97,12 +118,22 @@ export default function SectionProyects() {
 		images.children[currentCard].classList.add(styles.visible);
 
 		for (var i = 0; i < dif; i++) {
-			const clone = originals[currentOriginalNeg].cloneNode(true);
+			const firstImage = images.children[0];
+			const firstImageIndexProp = (firstImage.getAttribute("data-index") || 0) as number;
+			const indexToClone =
+				firstImageIndexProp - 1 < 0 ? originals.length - 1 : firstImageIndexProp - 1;
+			const clone = originals[indexToClone].cloneNode(true);
 			images.insertBefore(clone, images.children[0]);
 			currentOriginalNeg += 1;
 			if (currentOriginalNeg > originals.length) {
 				currentOriginalNeg = currentOriginalNeg - originals.length;
 			}
+			/* const clone = originals[currentOriginalNeg].cloneNode(true);
+			images.insertBefore(clone, images.children[0]);
+			currentOriginalNeg += 1;
+			if (currentOriginalNeg > originals.length) {
+				currentOriginalNeg = currentOriginalNeg - originals.length;
+			} */
 		}
 		images.style.transitionDuration = "0s";
 		images.style.transform = `translate(-${(startCard + dif) * cardWidth - mobileDif}px)`;
@@ -110,6 +141,8 @@ export default function SectionProyects() {
 		setTimeout(() => {
 			images.style.transitionDuration = "0.5s";
 			images.style.transform = `translate(-${startCard * cardWidth - mobileDif}px)`;
+
+			setTimeout(() => setAnimating(false), 500);
 		}, 10);
 
 		setTimeout(() => {
@@ -138,79 +171,87 @@ export default function SectionProyects() {
 		}
 	};
 
+	const onKeyDown = (e: KeyboardEvent) => {
+		if (animating) return;
+		switch (e.keyCode) {
+			case 37:
+				handleCardClickNeg(1);
+				break;
+			case 39:
+				handleCardClickPos(1);
+				break;
+			default:
+				break;
+		}
+	};
+
+	const onResize = () => {
+		if (!cardsRef.current) return;
+		const cards = cardsRef.current.children;
+		const startCard = Math.floor(cards.length / 2);
+		setStartCard(startCard);
+		cards[startCard].classList.add(styles.visible);
+
+		let cw;
+		let mb;
+		if (window.innerWidth < 1000) {
+			setCardWidth(window.innerWidth * 0.8 + 10);
+			cw = window.innerWidth * 0.8 + 10;
+			setMobileDif(window.innerWidth * 0.1);
+			mb = window.innerWidth * 0.1;
+		} else {
+			setCardWidth(460);
+			cw = 460;
+			setMobileDif(0);
+			mb = 0;
+		}
+
+		if (images) images.style.transform = `translate(-${startCard * cw - mb}px)`;
+	};
+
+	const onMouseDown = (e: MouseEvent) => {
+		if (!images) return;
+		const children = Array.prototype.slice.call(images.children);
+		const index = children.indexOf(e.target);
+		const dif = index - startCard;
+		if (dif > 0) handleCardClickPos(dif);
+		else if (dif < 0) handleCardClickNeg(-dif);
+	};
+
 	useEffect(() => {
 		if (!images) return;
-		images.style.transform = `translate(-${startCard * cardWidth - mobileDif}px)`;
+		//images.style.transform = `translate(-${startCard * cardWidth - mobileDif}px)`;
 
 		/* @ts-ignore */
 		images.addEventListener("swiped", onSwipe);
 
-		const onMouseDown = (e: MouseEvent) => {
-			const children = Array.prototype.slice.call(images.children);
-			const index = children.indexOf(e.target);
-			const dif = index - startCard;
-			if (dif > 0) handleCardClickPos(dif);
-			else if (dif < 0) handleCardClickNeg(-dif);
-		};
-
 		images.addEventListener("click", onMouseDown);
 
-		const onResize = () => {
-			let cw;
-			let mb;
-			if (window.innerWidth < 1000) {
-				setCardWidth(window.innerWidth * 0.8 + 10);
-				cw = window.innerWidth * 0.8 + 10;
-				setMobileDif(window.innerWidth * 0.1);
-				mb = window.innerWidth * 0.1;
-			} else {
-				setCardWidth(460);
-				cw = 460;
-				setMobileDif(0);
-				mb = 0;
-			}
-
-			if (images) images.style.transform = `translate(-${startCard * cw - mb}px)`;
-		};
 		window.addEventListener("resize", onResize);
 
-		let animating = false;
-
-		const onKeyDown = (e: KeyboardEvent) => {
-			if (animating) return;
-			switch (e.keyCode) {
-				case 37:
-					animating = true;
-					handleCardClickNeg(1);
-					setTimeout(() => {
-						animating = false;
-					}, 600);
-					break;
-				case 39:
-					animating = true;
-					handleCardClickPos(1);
-					setTimeout(() => {
-						animating = false;
-					}, 600);
-					break;
-				default:
-					break;
-			}
-		};
 		window.addEventListener("keydown", onKeyDown);
 
 		return () => {
-			images.removeEventListener("mousedown", onMouseDown);
+			images.removeEventListener("click", onMouseDown);
 			/* @ts-ignore */
 			images.removeEventListener("swiped", onSwipe);
 			window.removeEventListener("resize", onResize);
+			window.removeEventListener("keydown", onKeyDown);
 		};
+	}, [images, cardWidth, mobileDif, animating, startCard]);
+
+	useEffect(() => {
+		if (!images) return;
+		images.style.transform = `translate(-${startCard * cardWidth - mobileDif}px)`;
 	}, [images, cardWidth, mobileDif]);
 
 	useEffect(() => {
 		if (ref.current) {
 			const cards = ref.current.querySelector(`.${styles.cards}`) as HTMLDivElement;
 			setImages(cards);
+
+			const dots = ref.current.querySelector(`.${styles.dots}`) as HTMLDivElement;
+			setDots(dots);
 		}
 
 		if (window.innerWidth < 1000) {
@@ -220,21 +261,18 @@ export default function SectionProyects() {
 			setCardWidth(460);
 			setMobileDif(0);
 		}
-		document.querySelectorAll(`#proyects .${styles.card}`).forEach((el) => {
+		document.querySelectorAll(`#projects .${styles.card}`).forEach((el) => {
 			const cl = el.cloneNode(true) as HTMLDivElement;
 			cl.classList.remove(styles.visible);
 			setOriginals((old) => [...old, cl]);
 		});
-
-		/* let sEvents = document.createElement("script");
-		sEvents.src = "swiped-events.min.js";
-		document.head.appendChild(sEvents); */
 	}, []);
 
 	useEffect(() => {
 		if (!images) return;
 		const firstCardClone = images.children[0].cloneNode(true);
 		const lastCardClone = images.children[images.children.length - 1].cloneNode(true);
+
 		images.insertBefore(lastCardClone, images.children[0]);
 		images.appendChild(firstCardClone);
 	}, [images]);
@@ -254,9 +292,52 @@ export default function SectionProyects() {
 		cards[startCard - 1].classList.add(styles.visible);
 	}, [cardsRef]);
 
+	useEffect(() => {
+		if (!dots || !images) return;
+		const dotsChildren = dots.children;
+		const selectedProject = images?.querySelector(`.${styles.visible}`);
+		const selectedProjectIndex = (selectedProject?.getAttribute("data-index") || 0) as number;
+
+		for (let i = 0; i < dotsChildren.length; i++) {
+			dotsChildren[i].classList.remove(styles.active);
+		}
+		dotsChildren[selectedProjectIndex].classList.add(styles.active);
+	}, [dots, images, animating]);
+
+	useEffect(() => {
+		if (!dots) return;
+
+		Array.from(dots.children).forEach((dot: Element, i: number) => {
+			dot.addEventListener("click", () => {
+				if (!images || animating) return;
+
+				const selectedProjects = images.querySelectorAll(`[data-index="${i}"]`);
+				const selectedProject = selectedProjects[selectedProjects.length - 1];
+				const currentProject = images.querySelector(`.${styles.visible}`);
+
+				if (!selectedProject || !currentProject) return;
+
+				// get currentProject index on its parent children
+				const parent = currentProject.parentElement as HTMLDivElement;
+				const currentProjectIndexOnParent = Array.prototype.slice
+					.call(parent.children)
+					.indexOf(currentProject);
+
+				const selectedProjectIndexOnParent = Array.prototype.slice
+					.call(parent.children)
+					.indexOf(selectedProject);
+
+				const dif = selectedProjectIndexOnParent - currentProjectIndexOnParent;
+
+				if (dif > 0) handleCardClickPos(dif);
+				else if (dif < 0) handleCardClickNeg(-dif);
+			});
+		});
+	}, [dots]);
+
 	return (
-		<section id="proyects" className={styles.proyects} ref={ref}>
-			<h2 className="spanText" ref={titleRef}>
+		<section id="projects" className={styles.projects} ref={ref}>
+			<h2 className="spanText" ref={titleRef} aria-label="Proyectos">
 				<span>P</span>
 				<span>r</span>
 				<span>o</span>
@@ -270,75 +351,26 @@ export default function SectionProyects() {
 
 			<div id="carrousel" className={styles.carrousel} {...handlers}>
 				<div ref={cardsRef} className={styles.cards} style={{ transform: "translate(-920px)" }}>
-					<Project
-						title="Kubikware"
-						description="Recreación de la página de kubikware."
-						stacks={["HTML", "CSS", "JS"]}
-						link="https://kubikware.netlify.app/"
-						image={"/img/kubikware-remake.png"}
-					/>
-					<Project
-						title="RL Stats"
-						description="Una aplicación móvil que da acceso a cualquier persona a sus rangos de Rocket League
-						desde su teléfono. Esta aplicación está pensada para todos los jugadores de Rocket
-						League, aqui podran seguir su progreso, encontrar sus rangos, sus estadisticas y sus
-						partidos jugados. La solución consiste en 4 páginas, un inicio de sesión, una pagina
-						principal, una de estadisticas y una de partidos."
-						stacks={["Flutter", "Dart", "RestAPI"]}
-						link="https://play.google.com/store/apps/details?id=com.drogebot.rocketleaguestats"
-						image={"/img/rocket stats.png"}
-					/>
-					<Project
-						title="Satellites On Fire"
-						description="Satellites On Fire es un sistema de detección en tiempo real de focos de calor, los cuales contemplan distintos niveles de probabilidad de ser incendios. El usuario puede observarlos en tiempo real, teniendo también la posibilidad de ver focos pasados. Adicionalmente, brindamos un sistema de alertas para que los usuarios puedan recibir notificaciones de los últimos focos detectados en sus zonas, permitiendoles actuar a tiempo, reduciendo costos causados por la propagación de los incendios."
-						stacks={["Front-end dev", "React", "Material-UI"]}
-						link="https://www.satellitesonfire.com/"
-						image={"/img/sof.png"}
-					/>
-					<Project
-						title="Zerti"
-						description="Zerti es un proyecto Web3 cuyo objetivo central es asegurar la validez y confianza de las certificaciones, aptitudes y títulos emitidos por las instituciones académicas, organizaciones y empresas, basándose en la inmutabilidad y transparencia de la tecnología blockchain."
-						stacks={["React", "Web3", "NodeJs"]}
-						link="https://zerti.com.ar/"
-						image={"/img/zerti.png"}
-					/>
-					<Project
-						title="InFocus"
-						description="Una página web que brinda herramientas de ayuda a jóvenes y adultos en etapa laboral
-							con déficit de atención. Se brindan herramientas tales como recordatorios,
-							organizadores, una sección de estudio (donde puedas establecer un tiempo de trabajo y
-							te dé tiempos de recreo en proporción al trabajo y que te vaya guiando para que puedas
-							lograr un estudio efectivo), una sección de ejercicios de relajación y por último una
-							sección de notas para cuando el usuario esté en la escuela/trabajo, pueda tomar sus
-							apuntes y tener todo organizado."
-						stacks={["React", "NodeJs", "Express"]}
-						link="https://infocusapp.netlify.app"
-						image={"/img/infocus.png"}
-					/>
-					<Project
-						title="Calcular Fechas"
-						description="Una aplicación móvil para ver tus eventos de una forma más divertida. Podrás crear 2
-							tipos de eventos, pasados o futuros. Para los eventos futuros, podrás ponerle un
-							título y activar un recordatorio para el momento del evento o para un tiempo antes.
-							Cuando ya lo tengas creado, podrás acceder a una pantalla donde hay una cuenta
-							regresiva para el evento. Para los eventos pasados, vas a poder ver el tiempo que pasó
-							desde la fecha indicada de una manera distinta. Podrás ver la cantidad exacta que pasó
-							de cada medida de tiempo, por ejemplo, te dirá la cantidad de segundos que pasaron
-							desde que naciste."
-						stacks={["Android", "Kotlin", "Native App"]}
-						link="/files/CalcularFechas.apk"
-						download={true}
-						image={"/img/calcular-fechas.png"}
-					/>
-					<Project
-						title="Wordle Infinito"
-						description="Clásico juego de Wordle pero sacando la necesidad de esperar 24 horas para poder jugar con otra palabra."
-						stacks={["HTML", "CSS", "JS"]}
-						link="https://wordle.nicohalpe.com.ar/"
-						image={"/img/wordle.png"}
-					/>
-
-					{/* <Project title="" description="" stacks={["", "", ""]} link="" image={"/img/.png"} /> */}
+					{projects.map((project: Project, i: number) => (
+						<Project
+							key={project.title}
+							title={project.title}
+							description={project.description}
+							stacks={project.stacks}
+							image={project.image}
+							link={project.link}
+							download={project.download}
+							index={i}
+						/>
+					))}
+				</div>
+				<div className={styles.dots}>
+					{projects.map((project: Project, index: number) => (
+						<div
+							key={project.title}
+							className={styles.dot + (index === 0 ? ` ${styles.active}` : "")}
+						></div>
+					))}
 				</div>
 			</div>
 		</section>
@@ -353,11 +385,21 @@ type ProjectProps = {
 	link: string;
 	download?: boolean;
 	visible?: boolean;
+	index: number;
 };
 
-function Project({ title, description, stacks, image, link, download, visible }: ProjectProps) {
+function Project({
+	title,
+	description,
+	stacks,
+	image,
+	link,
+	download,
+	visible,
+	index,
+}: ProjectProps) {
 	return (
-		<div className={styles.card + (visible ? ` ${styles.visible}` : "")}>
+		<div className={styles.card + (visible ? ` ${styles.visible}` : "")} data-index={index}>
 			<div className={styles["card-image-container"]}>
 				<a
 					className={styles["card-image-link"]}

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { useForm, ValidationError } from "@formspree/react";
 
 import styles from "./SectionContact.module.css";
-import useBouncingAnimation from "../hooks/useBouncingAnimation";
+import useBouncingAnimation from "../../hooks/useBouncingAnimation";
 
 export default function SectionContact() {
 	const ref = useRef<HTMLElement>(null);
@@ -62,7 +62,7 @@ export default function SectionContact() {
 
 	return (
 		<section id="contact" className={styles.contact} ref={ref}>
-			<h2 className="spanText" ref={titleRef}>
+			<h2 className="spanText" ref={titleRef} aria-label="Contactame">
 				<span>C</span>
 				<span>o</span>
 				<span>n</span>

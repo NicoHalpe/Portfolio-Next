@@ -1,4 +1,4 @@
-.proyects {
+.projects {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -6,31 +6,53 @@
 	transition: 1s;
 }
 
-.proyects.visible {
+.projects.visible {
 	opacity: 1;
 }
 
-.proyects h2 {
+.projects h2 {
 	font-size: clamp(2rem, 6vw, 4.5rem);
 	color: var(--color-accent);
 	margin-bottom: 5vh;
 }
 
-.proyects .carrousel {
+.projects .carrousel {
 	width: 450px;
 	height: fit-content;
 	align-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	/* overflow: hidden; */
 }
 
-.proyects .cards {
+.projects .carrousel .dots {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.projects .carrousel .dots .dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: var(--text-color);
+	cursor: pointer;
+}
+
+.projects .carrousel .dots .dot.active {
+	background-color: var(--color-accent);
+}
+
+.projects .cards {
 	display: flex;
 	flex-direction: row;
 	width: fit-content;
 	gap: 10px;
 }
 
-.proyects .cards .card {
+.projects .cards .card {
 	position: relative;
 	width: 406px;
 	display: flex;
@@ -47,7 +69,7 @@
 	cursor: pointer;
 }
 
-.proyects .cards .card:not(.visible):after {
+.projects .cards .card:not(.visible):after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -59,13 +81,13 @@
 	background-color: var(--card-after-color);
 }
 
-.proyects .cards .card.visible {
+.projects .cards .card.visible {
 	opacity: 1;
 	transform: scale(1);
 	cursor: initial;
 }
 
-.proyects .card .card-image-container {
+.projects .card .card-image-container {
 	display: flex;
 	width: 100%;
 	height: 40%;
@@ -73,7 +95,7 @@
 	overflow: hidden;
 }
 
-.proyects .card .card-image-link {
+.projects .card .card-image-link {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -82,7 +104,7 @@
 	height: 100%;
 }
 
-.proyects .card .card-image {
+.projects .card .card-image {
 	width: 100%;
 	height: fit-content;
 	transition: 0.5s;
@@ -91,27 +113,27 @@
 }
 
 .card-image:has(+ .hover:hover),
-.proyects .card .card-image:hover {
+.projects .card .card-image:hover {
 	transform: scale(1.2);
 }
 
-.proyects .card .card-title {
+.projects .card .card-title {
 	margin-top: 20px;
 	font-size: clamp(1rem, 2vw, 1.5rem);
 }
-.proyects .card .card-description {
+.projects .card .card-description {
 	text-align: center;
 	font-size: clamp(0.8rem, 2vw, 1rem);
 	width: 95%;
 }
 
-.proyects .card .card-buttons a {
+.projects .card .card-buttons a {
 	background-color: #64beff;
 	padding: 10px 20px;
 	border-radius: 5px;
 }
 
-.proyects .card .card-stacks {
+.projects .card .card-stacks {
 	width: 100%;
 	margin-bottom: 10px;
 	padding-top: 30px;
@@ -122,7 +144,7 @@
 	justify-content: center;
 }
 
-.proyects .card .card-stacks .chip {
+.projects .card .card-stacks .chip {
 	height: fit-content;
 	width: fit-content;
 	background-color: var(--chip-background-color);
@@ -167,16 +189,16 @@
 }
 
 @media only screen and (max-width: 1000px) {
-	.proyects .carrousel {
+	.projects .carrousel {
 		width: 100vw;
 		overflow: hidden;
 	}
 
-	.proyects .carrousel.visible {
+	.projects .carrousel.visible {
 		animation: move-center 1s ease-in-out;
 	}
 
-	.proyects .cards .card {
+	.projects .cards .card {
 		background-color: var(--background-color);
 		width: 80vw;
 		box-sizing: border-box;

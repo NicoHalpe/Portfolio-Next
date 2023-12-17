@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 
 import styles from "./SectionSkills.module.css";
-import useBouncingAnimation from "../hooks/useBouncingAnimation";
+import useBouncingAnimation from "../../hooks/useBouncingAnimation";
 
 export default function SectionSkills() {
 	const ref = useRef<HTMLElement>(null);
@@ -26,7 +26,7 @@ export default function SectionSkills() {
 			id="skills"
 			ref={ref}
 		>
-			<h2 className="spanText" ref={titleRef}>
+			<h2 className="spanText" ref={titleRef} aria-label="Habilidades">
 				<span>H</span>
 				<span>a</span>
 				<span>b</span>
@@ -97,7 +97,7 @@ export default function SectionSkills() {
 					]}
 				/>
 			</div>
-			<a className="scroll-down r" href="#proyects" title="ir a la seccion proyectos">
+			<a className="scroll-down r" href="#projects" title="ir a la seccion proyectos">
 				<span>scroll down</span>
 				<svg viewBox="0 0 448 512" aria-label="flecha">
 					<path
@@ -107,7 +107,7 @@ export default function SectionSkills() {
 					></path>
 				</svg>
 			</a>
-			<a className="scroll-down l" href="#proyects" title="ir a la seccion proyectos">
+			<a className="scroll-down l" href="#projects" title="ir a la seccion proyectos">
 				<span>scroll down</span>
 				<svg viewBox="0 0 448 512" aria-label="flecha">
 					<path
