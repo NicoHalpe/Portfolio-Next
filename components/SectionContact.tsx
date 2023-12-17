@@ -1,32 +1,36 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "./../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import { useForm, ValidationError } from "@formspree/react";
 
 import styles from "./SectionContact.module.css";
+import useBouncingAnimation from "../hooks/useBouncingAnimation";
 
 export default function SectionContact() {
-	const ref = useRef();
-	const submitMsgRef = useRef();
-	const formRef = useRef();
+	const ref = useRef<HTMLElement>(null);
+	const submitMsgRef = useRef<HTMLDivElement>(null);
+	const formRef = useRef<HTMLFormElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
 	const [formState, submitForm] = useForm(process.env.NEXT_PUBLIC_FORM || "xnqyknlo");
 
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	useBouncingAnimation(titleRef);
+
 	useEffect(() => {
 		if (!formState.succeeded) return;
-		formRef.current.reset();
-		submitMsgRef.current.classList.add(styles.visible);
+		formRef.current?.reset();
+		submitMsgRef.current?.classList.add(styles.visible);
 		setTimeout(() => {
-			submitMsgRef.current.classList.remove(styles.visible);
-			submitMsgRef.current.classList.add(styles.leave);
+			submitMsgRef.current?.classList.remove(styles.visible);
+			submitMsgRef.current?.classList.add(styles.leave);
 			setTimeout(() => {
-				submitMsgRef.current.classList.remove(styles.leave);
+				submitMsgRef.current?.classList.remove(styles.leave);
 			}, 800);
 		}, 3000);
 	}, [formState.succeeded]);
 
 	useEffect(() => {
-		if (onScreen) ref.current.classList.add(styles.visible);
+		if (onScreen) ref.current?.classList.add(styles.visible);
 	}, [onScreen]);
 
 	/* useEffect(() => {
@@ -58,7 +62,7 @@ export default function SectionContact() {
 
 	return (
 		<section id="contact" className={styles.contact} ref={ref}>
-			<h2 className="spanText">
+			<h2 className="spanText" ref={titleRef}>
 				<span>C</span>
 				<span>o</span>
 				<span>n</span>
@@ -80,7 +84,7 @@ export default function SectionContact() {
 					</div>
 					<input placeholder="Asunto" type="text" name="asunto" id="asunto" />
 					<ValidationError prefix="Asunto" field="asunto" errors={formState.errors} />
-					<textarea placeholder="Mensaje" name="mensaje" id="mensaje" rows="8"></textarea>
+					<textarea placeholder="Mensaje" name="mensaje" id="mensaje" rows={8}></textarea>
 					<ValidationError prefix="Mensaje" field="mensaje" errors={formState.errors} />
 					<button type="submit" disabled={formState.submitting}>
 						¡Enviar!

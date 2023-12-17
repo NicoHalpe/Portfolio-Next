@@ -1,12 +1,16 @@
 import React, { useRef } from "react";
-import useIntersectionObserver from "./../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import Programming from "../public/img/programming.svg";
 
 import styles from "./SectionAbout.module.css";
+import useBouncingAnimation from "../hooks/useBouncingAnimation";
 
 export default function SectionAbout() {
-	const ref = useRef();
+	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
+
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	useBouncingAnimation(titleRef);
 
 	return (
 		<section className={`${styles.about} ${onScreen ? styles.visible : ""}`} id="about" ref={ref}>
@@ -17,7 +21,7 @@ export default function SectionAbout() {
 					aria-label="Foto decorativa"
 				/>
 				<div className={styles.text}>
-					<h2 className="spanText">
+					<h2 className="spanText" ref={titleRef}>
 						<span>S</span>
 						<span>o</span>
 						<span>b</span>
@@ -29,12 +33,13 @@ export default function SectionAbout() {
 					</h2>
 					<p>
 						Soy <b>Nicolás Halperin</b>, tengo 18 años y desde hace 5 que me estoy adentrando en el
-						mundo de la programación y el desarrollo de manera autodidácta. Desde chico que estoy interesado en todo el
-						tema de la tecnología, siempre buscando soluciones para automatizar tareas de manera
-						simple. Con este incentivo comencé a programar, haciendo aplicaciones básicas que den
-						solución a problemas de la vida cotidiana. Con el tiempo fui aprendiendo nuevos
-						lenguajes y mejorando mis prácticas, por lo que en este momento puedo crear soluciones
-						más complejas, como páginas web, aplicaciones para Windows o móviles, APIs y mucho más.
+						mundo de la programación y el desarrollo de manera autodidácta. Desde chico que estoy
+						interesado en todo el tema de la tecnología, siempre buscando soluciones para
+						automatizar tareas de manera simple. Con este incentivo comencé a programar, haciendo
+						aplicaciones básicas que den solución a problemas de la vida cotidiana. Con el tiempo
+						fui aprendiendo nuevos lenguajes y mejorando mis prácticas, por lo que en este momento
+						puedo crear soluciones más complejas, como páginas web, aplicaciones para Windows o
+						móviles, APIs y mucho más.
 						<br></br>A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
 						titulo de Bachillerato con Orientación en Tecnologías de la Información y la
 						Comunicación. Actualmente estoy empezando la Licentura en Ciencias de la Computación en

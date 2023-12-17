@@ -1,11 +1,12 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap"); */
 @font-face {
 	font-family: Rubik;
-	src: url(https://fonts.gstatic.com/s/rubik/v21/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4iFV0U1.woff2) format('woff2');
+	src: url(https://fonts.gstatic.com/s/rubik/v21/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4iFV0U1.woff2)
+		format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
-  }
+}
 
 * {
 	margin: 0;
@@ -16,10 +17,6 @@
 
 *:not(#carrousel *) {
 	transition: color 0.5s, background-color 0.5s, box-shadow 0.5s, opacity 0.5s;
-}
-
-#hoverelement {
-	position: fixed;
 }
 
 html,
@@ -66,6 +63,11 @@ html[theme="dark"] {
 .animated {
 	color: var(--color-accent);
 	animation: rubberBand 1s;
+}
+
+.bounceIn {
+	animation-name: bounceIn;
+	animation-duration: 0.75s;
 }
 
 section {

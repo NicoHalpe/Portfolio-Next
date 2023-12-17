@@ -1,27 +1,38 @@
-import React, { useCallback, useEffect } from "react";
-import { spline } from "@georgedoescode/spline";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { spline } from "../utils/spline";
 import SimplexNoise from "simplex-noise";
 import Avatar from "./Avatar";
 
 import styles from "./SectionMe.module.css";
 
+type Point = {
+	x: number;
+	y: number;
+	originX: number;
+	originY: number;
+	noiseOffsetX: number;
+	noiseOffsetY: number;
+};
+
 export default function SectionMe() {
-	const [noiseStep, setNoiseStep] = React.useState(0.0005);
-	const [simplex, setSimplex] = React.useState(null);
-	const [points, setPoints] = React.useState(null);
+	const [noiseStep, setNoiseStep] = useState(0.0005);
+	const [simplex, setSimplex] = useState<SimplexNoise | null>(null);
+	const [points, setPoints] = useState<Point[]>();
 
-	const avatarRef = React.useRef(null);
-	const [avatar, setAvatar] = React.useState(null);
+	const avatarRef = useRef<HTMLDivElement>(null);
+	const hoverElementRef = useRef<HTMLDivElement>(null);
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	const [avatar, setAvatar] = useState<HTMLDivElement>();
 
-	const [light, setLight] = React.useState(false);
+	const [light, setLight] = useState(false);
 
-	function map(n, start1, end1, start2, end2) {
+	function map(n: number, start1: number, end1: number, start2: number, end2: number) {
 		return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
 	}
 
 	const noise = useCallback(
-		(x, y) => {
-			return simplex.noise2D(x, y);
+		(x: number, y: number) => {
+			return simplex?.noise2D(x, y);
 		},
 		[simplex]
 	);
@@ -29,7 +40,7 @@ export default function SectionMe() {
 	const animate = useCallback(() => {
 		if (!avatar) return;
 		const path = avatar.querySelector("path");
-		const path2 = avatar.getElementById("react-path-2");
+		const path2 = avatar.querySelector("#react-path-2");
 
 		if (!path || !path2 || !points) return;
 
@@ -37,17 +48,16 @@ export default function SectionMe() {
 		path2.setAttribute("d", spline(points, 1, true));
 
 		const coords = path.getBoundingClientRect();
-		const hoverelement = document.getElementById("hoverelement");
-		hoverelement.style.setProperty("left", `${coords.left}px`, "");
-		hoverelement.style.setProperty("top", `${coords.top}px`, "");
-		hoverelement.style.setProperty("width", `${coords.width}px`, "");
-		hoverelement.style.setProperty("height", `${coords.height}px`, "");
+		hoverElementRef.current?.style.setProperty("left", `${coords.left}px`, "");
+		hoverElementRef.current?.style.setProperty("top", `${coords.top}px`, "");
+		hoverElementRef.current?.style.setProperty("width", `${coords.width}px`, "");
+		hoverElementRef.current?.style.setProperty("height", `${coords.height}px`, "");
 
 		for (let i = 0; i < points.length; i++) {
 			const point = points[i];
 
-			const nX = noise(point.noiseOffsetX, point.noiseOffsetX);
-			const nY = noise(point.noiseOffsetY, point.noiseOffsetY);
+			const nX = noise(point.noiseOffsetX, point.noiseOffsetX) || 0;
+			const nY = noise(point.noiseOffsetY, point.noiseOffsetY) || 0;
 			const x = map(nX, -1, 1, point.originX - 20, point.originX + 20);
 			const y = map(nY, -1, 1, point.originY - 20, point.originY + 20);
 
@@ -75,45 +85,46 @@ export default function SectionMe() {
 		};
 	}, [noiseStep, animate]);
 
+	function createPoints() {
+		const points = [];
+		const numPoints = 5;
+		const angleStep = (Math.PI * 2) / numPoints;
+		const rad = 78;
+
+		for (let i = 1; i <= numPoints; i++) {
+			const theta = i * angleStep;
+
+			const x = 100 + Math.cos(theta) * rad;
+			const y = 100 + Math.sin(theta) * rad;
+
+			points.push({
+				x: x,
+				y: y,
+				originX: x,
+				originY: y,
+				noiseOffsetX: Math.random() * 1000,
+				noiseOffsetY: Math.random() * 1000,
+			});
+		}
+
+		return points;
+	}
+
 	useEffect(() => {
 		//#region Animated Blob
 
 		const setupAvatar = () => {
+			if (!avatar) return;
 			try {
-				const path2 = avatar.getElementById("react-path-2");
-				const transform = avatar.getElementById("transform");
-				transform.setAttribute("transform", "translate(845.000000, 1130.000000)");
-				path2.setAttribute("transform", "translate(0, -5)");
+				const path2 = avatar.querySelector("#react-path-2");
+				const transform = avatar.querySelector("#transform");
+				transform?.setAttribute("transform", "translate(845.000000, 1130.000000)");
+				path2?.setAttribute("transform", "translate(0, -5)");
 
 				const simplex = new SimplexNoise();
 				setSimplex(simplex);
 				const points = createPoints();
 				setPoints(points);
-
-				function createPoints() {
-					const points = [];
-					const numPoints = 5;
-					const angleStep = (Math.PI * 2) / numPoints;
-					const rad = 78;
-
-					for (let i = 1; i <= numPoints; i++) {
-						const theta = i * angleStep;
-
-						const x = 100 + Math.cos(theta) * rad;
-						const y = 100 + Math.sin(theta) * rad;
-
-						points.push({
-							x: x,
-							y: y,
-							originX: x,
-							originY: y,
-							noiseOffsetX: Math.random() * 1000,
-							noiseOffsetY: Math.random() * 1000,
-						});
-					}
-
-					return points;
-				}
 			} catch {}
 		};
 
@@ -123,7 +134,7 @@ export default function SectionMe() {
 				clearInterval(i);
 				return;
 			}
-			setAvatar(avatarRef?.current?.children[0]);
+			setAvatar(avatarRef.current?.children[0] as HTMLDivElement);
 		}, 100);
 
 		/* if(avatar) setupAvatar(); */
@@ -135,7 +146,10 @@ export default function SectionMe() {
 		/* const theme = document.documentElement.getAttribute("theme");
 		setLight(theme === "dark" ? false : true); */
 
-		[...document.querySelectorAll(`#me .${styles.content} h1 span`)].map((el, i) => {
+		const titleEl = titleRef.current;
+		if (!titleEl) return;
+
+		titleEl.querySelectorAll("span").forEach((el, i) => {
 			el.style.setProperty("animation-delay", `${i * 50}ms`, "");
 			el.classList.add(styles.bounceIn);
 			el.addEventListener("animationend", (e) => {
@@ -148,7 +162,7 @@ export default function SectionMe() {
 			return true;
 		});
 
-		document.querySelectorAll(".spanText span:not(.blank)").forEach((el) => {
+		titleEl.querySelectorAll("span:not(.blank)").forEach((el) => {
 			el.addEventListener("mouseover", (e) => {
 				el.classList.add("animated");
 			});
@@ -166,20 +180,20 @@ export default function SectionMe() {
 		setNoiseStep(0.001);
 	};
 
-	const avatarClick = (e) => {
+	const avatarClick = () => {
 		const theme = document.documentElement.getAttribute("theme");
 		document.documentElement.setAttribute("theme", theme === "dark" ? "light" : "dark");
 		const colorAccent = getComputedStyle(document.documentElement).getPropertyValue(
 			"--color-accent"
 		);
-		avatar.querySelector("path").setAttribute("fill", colorAccent);
+		avatar?.querySelector("path")?.setAttribute("fill", colorAccent);
 		setLight(theme === "dark" ? true : false);
 	};
 
 	return (
 		<section className={styles.me} id="me">
 			<div className={styles.content}>
-				<h1 className="spanText">
+				<h1 className="spanText" ref={titleRef}>
 					<span>H</span>
 					<span>o</span>
 					<span>l</span>
@@ -228,8 +242,8 @@ export default function SectionMe() {
 				</div>
 			</div>
 			<div
+				ref={hoverElementRef}
 				className={styles.hoverelement}
-				id="hoverelement"
 				onClick={avatarClick}
 				onMouseOver={setFastNoiseStep}
 				onMouseLeave={setSlowNoiseStep}

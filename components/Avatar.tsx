@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Avatar({ light }) {
+type Props = {
+	light?: boolean;
+};
+
+export default function Avatar({ light }: Props) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -28,16 +32,13 @@ export default function Avatar({ light }) {
 				></path>
 				<mask id="maskmask">
 					<rect width="100%" height="40%" fill="#fff"></rect>
-					<use xlinkHref="#react-path-2"></use>
+					<use xlinkHref="#react-path-2" transform="translate(-20 -25)"></use>
 				</mask>
 				<rect id="maskfull" width="100%" height="100%" mask="url(#maskmask)"></rect>
 			</defs>
 			<g fill="none" fillRule="evenodd" transform="translate(-825 -1105)">
 				<g id="transform" transform="translate(845 1105)">
-					<mask id="react-mask-5" fill="#fff">
-						<use transform="translate(-20 -25)" xlinkHref="#maskfull"></use>
-					</mask>
-					<g mask="url(#react-mask-5)">
+					<g mask="url(#maskmask)">
 						<g transform="scale(.6)">
 							<g transform="translate(32 36)">
 								<mask id="react-mask-6" fill="#fff">
@@ -218,8 +219,8 @@ export default function Avatar({ light }) {
 											y2="70.5058195%"
 											id="react-linear-gradient-108"
 										>
-											<stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
-											<stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+											<stop stopColor="#FFFFFF" stopOpacity="0.5" offset="0%"></stop>
+											<stop stopColor="#000000" stopOpacity="0.5" offset="100%"></stop>
 										</linearGradient>
 										<linearGradient
 											x1="50%"
@@ -228,8 +229,8 @@ export default function Avatar({ light }) {
 											y2="100%"
 											id="react-linear-gradient-109"
 										>
-											<stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
-											<stop stop-color="#000000" stop-opacity="0.5" offset="70.5058195%"></stop>
+											<stop stopColor="#FFFFFF" stopOpacity="0.5" offset="0%"></stop>
+											<stop stopColor="#000000" stopOpacity="0.5" offset="70.5058195%"></stop>
 										</linearGradient>
 									</defs>
 

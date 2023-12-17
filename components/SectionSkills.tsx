@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "./../hooks/useIntersectionObserver";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 
 import styles from "./SectionSkills.module.css";
+import useBouncingAnimation from "../hooks/useBouncingAnimation";
 
 export default function SectionSkills() {
-	const ref = useRef();
+	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 	const [visible, setVisible] = React.useState(false);
 
@@ -16,13 +17,16 @@ export default function SectionSkills() {
 		}
 	}, [onScreen]);
 
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	useBouncingAnimation(titleRef);
+
 	return (
 		<section
 			className={styles.skills + (visible ? ` ${styles.visible}` : "")}
 			id="skills"
 			ref={ref}
 		>
-			<h2 className="spanText">
+			<h2 className="spanText" ref={titleRef}>
 				<span>H</span>
 				<span>a</span>
 				<span>b</span>
@@ -117,7 +121,14 @@ export default function SectionSkills() {
 	);
 }
 
-const Card = ({ name, title, lenguajes, herramientas }) => {
+type CardProps = {
+	name: string;
+	title: string;
+	lenguajes: string[];
+	herramientas: string[];
+};
+
+const Card = ({ name, title, lenguajes, herramientas }: CardProps) => {
 	return (
 		<Tilt className={styles.card}>
 			<div className={styles.header}>

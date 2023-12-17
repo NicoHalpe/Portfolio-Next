@@ -54,6 +54,7 @@
 
 .me .hoverelement {
 	cursor: pointer;
+	position: fixed;
 }
 
 .me .buttons {

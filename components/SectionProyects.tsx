@@ -1,29 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import { useSwipeable } from "react-swipeable";
-import useIntersectionObserver from "./../hooks/useIntersectionObserver";
+import { SwipeEventData, useSwipeable } from "react-swipeable";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 import styles from "./SectionProyects.module.css";
+import useBouncingAnimation from "../hooks/useBouncingAnimation";
+
+type SwipeEvent = CustomEvent<{
+	// swipe direction
+	dir: "up" | "down" | "left" | "right";
+	// touch type - stylus=apple pencil and direct=finger
+	touchType: "stylus" | "direct";
+	// x coords of swipe start
+	xStart: number;
+	// x coords of swipe end
+	xEnd: number;
+	// y coords of swipe start
+	yStart: number;
+	// y coords of swipe end
+	yEnd: number;
+}>;
 
 export default function SectionProyects() {
-	const [originals, setOriginals] = useState([]);
-	const [images, setImages] = useState();
+	const [originals, setOriginals] = useState<HTMLDivElement[]>([]);
+	const [images, setImages] = useState<HTMLDivElement>();
 	const [startCard, setStartCard] = useState(1);
-	const [cardWidth, setCardWidth] = useState();
+	const [cardWidth, setCardWidth] = useState(0);
 	const [mobileDif, setMobileDif] = useState(0);
-	const ref = useRef();
+	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
-	const handleCardClickPos = (dif) => {
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	useBouncingAnimation(titleRef);
+
+	const handleCardClickPos = (dif: number) => {
+		if (!images) return;
 		const check = images.querySelectorAll(`.${styles.card}`)[
 			images.querySelectorAll(`.${styles.card}`).length - 1
 		];
 		let currentOriginalPos =
 			originals.findIndex(
 				(original) =>
-					original.querySelector(`.${styles["card-title"]}`).innerHTML ===
-					check.querySelector(`.${styles["card-title"]}`).innerHTML
+					original.querySelector(`.${styles["card-title"]}`)?.innerHTML ===
+					check?.querySelector(`.${styles["card-title"]}`)?.innerHTML
 			) + 1;
 		if (currentOriginalPos > originals.length - 1) {
 			currentOriginalPos = currentOriginalPos - originals.length;
@@ -55,15 +75,17 @@ export default function SectionProyects() {
 		}, 500);
 	};
 
-	const handleCardClickNeg = (dif) => {
+	const handleCardClickNeg = (dif: number) => {
+		if (!images) return;
+
 		let currentCard = startCard;
 		if (!images.children[currentCard - dif]) return;
 		const check = images.querySelectorAll(`.${styles.card}`)[0];
 		let currentOriginalNeg =
 			originals.findIndex(
 				(original) =>
-					original.querySelector(`.${styles["card-title"]}`).innerHTML ===
-					check.querySelector(`.${styles["card-title"]}`).innerHTML
+					original.querySelector(`.${styles["card-title"]}`)?.innerHTML ===
+					check.querySelector(`.${styles["card-title"]}`)?.innerHTML
 			) - 1;
 		if (currentOriginalNeg < 0) {
 			currentOriginalNeg = originals.length - 1;
@@ -100,38 +122,40 @@ export default function SectionProyects() {
 	};
 
 	useEffect(() => {
-		if (onScreen) ref.current.classList.add(styles.visible);
+		if (onScreen) ref.current?.classList.add(styles.visible);
 	}, [onScreen]);
+
+	const onSwipe = (e: SwipeEvent) => {
+		switch (e.detail.dir) {
+			case "right":
+				handleCardClickNeg(1);
+				break;
+			case "left":
+				handleCardClickPos(1);
+				break;
+			default:
+				break;
+		}
+	};
 
 	useEffect(() => {
 		if (!images) return;
 		images.style.transform = `translate(-${startCard * cardWidth - mobileDif}px)`;
 
-		const onSwipe = (e) => {
-			switch (e.detail.dir) {
-				case "right":
-					handleCardClickNeg(1);
-					break;
-				case "left":
-					handleCardClickPos(1);
-					break;
-				default:
-					break;
-			}
-		};
+		/* @ts-ignore */
 		images.addEventListener("swiped", onSwipe);
 
-		const onMouseDown = (e) => {
-			console.log(e.target.classList);
+		const onMouseDown = (e: MouseEvent) => {
 			const children = Array.prototype.slice.call(images.children);
 			const index = children.indexOf(e.target);
 			const dif = index - startCard;
 			if (dif > 0) handleCardClickPos(dif);
 			else if (dif < 0) handleCardClickNeg(-dif);
 		};
+
 		images.addEventListener("click", onMouseDown);
 
-		const onResize = (e) => {
+		const onResize = () => {
 			let cw;
 			let mb;
 			if (window.innerWidth < 1000) {
@@ -152,7 +176,7 @@ export default function SectionProyects() {
 
 		let animating = false;
 
-		const onKeyDown = (e) => {
+		const onKeyDown = (e: KeyboardEvent) => {
 			if (animating) return;
 			switch (e.keyCode) {
 				case 37:
@@ -177,13 +201,17 @@ export default function SectionProyects() {
 
 		return () => {
 			images.removeEventListener("mousedown", onMouseDown);
+			/* @ts-ignore */
 			images.removeEventListener("swiped", onSwipe);
 			window.removeEventListener("resize", onResize);
 		};
 	}, [images, cardWidth, mobileDif]);
 
 	useEffect(() => {
-		setImages(document.querySelector(`#proyects .${styles.cards}`));
+		if (ref.current) {
+			const cards = ref.current.querySelector(`.${styles.cards}`) as HTMLDivElement;
+			setImages(cards);
+		}
 
 		if (window.innerWidth < 1000) {
 			setCardWidth(window.innerWidth * 0.8 + 10);
@@ -193,7 +221,7 @@ export default function SectionProyects() {
 			setMobileDif(0);
 		}
 		document.querySelectorAll(`#proyects .${styles.card}`).forEach((el) => {
-			const cl = el.cloneNode(true);
+			const cl = el.cloneNode(true) as HTMLDivElement;
 			cl.classList.remove(styles.visible);
 			setOriginals((old) => [...old, cl]);
 		});
@@ -216,7 +244,7 @@ export default function SectionProyects() {
 		onSwipedRight: (eventData) => handleCardClickNeg(1),
 	});
 
-	const cardsRef = useRef(null);
+	const cardsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (!cardsRef.current) return;
@@ -228,7 +256,7 @@ export default function SectionProyects() {
 
 	return (
 		<section id="proyects" className={styles.proyects} ref={ref}>
-			<h2 className="spanText">
+			<h2 className="spanText" ref={titleRef}>
 				<span>P</span>
 				<span>r</span>
 				<span>o</span>
@@ -317,7 +345,17 @@ export default function SectionProyects() {
 	);
 }
 
-function Project({ title, description, stacks, image, link, download, visible }) {
+type ProjectProps = {
+	title: string;
+	description: string;
+	stacks: string[];
+	image: string;
+	link: string;
+	download?: boolean;
+	visible?: boolean;
+};
+
+function Project({ title, description, stacks, image, link, download, visible }: ProjectProps) {
 	return (
 		<div className={styles.card + (visible ? ` ${styles.visible}` : "")}>
 			<div className={styles["card-image-container"]}>
