@@ -86,6 +86,8 @@ export default function Home() {
 				<link rel="apple-touch-icon" href="https://nicohalpe.com.ar/img/avatar192.png" />
 				<meta name="theme-color" content="#000000" />
 
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+
 				<title>Nicolas Halperin</title>
 			</Head>
 

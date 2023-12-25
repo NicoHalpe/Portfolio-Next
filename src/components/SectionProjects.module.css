@@ -26,11 +26,28 @@
 	/* overflow: hidden; */
 }
 
+.projects .carrousel .navigation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.projects .carrousel .navigation .arrow {
+	height: 1.5em;
+	width: 1.5em;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--text-color);
+	border: none;
+	cursor: pointer;
+}
+
 .projects .carrousel .dots {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	gap: 10px;
-	margin-bottom: 10px;
 }
 
 .projects .carrousel .dots .dot {
