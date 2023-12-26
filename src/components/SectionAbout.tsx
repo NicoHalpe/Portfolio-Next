@@ -15,11 +15,6 @@ export default function SectionAbout() {
 	return (
 		<section className={`${styles.about} ${onScreen ? styles.visible : ""}`} id="about" ref={ref}>
 			<div className={styles.content}>
-				<Programming
-					className={styles["programming-svg"]}
-					id="programming-svg"
-					aria-label="Foto decorativa"
-				/>
 				<div className={styles.text}>
 					<h2 className="spanText" ref={titleRef} aria-label="Sobre mí">
 						<span>S</span>
@@ -33,19 +28,28 @@ export default function SectionAbout() {
 					</h2>
 					<p>
 						Soy <b>Nicolás Halperin</b>, tengo 18 años y desde hace 5 que me estoy adentrando en el
-						mundo de la programación y el desarrollo de manera autodidácta. Desde chico que estoy
+						mundo de la programación y el desarrollo de manera autodidácta. 
+						<br></br>
+						Desde chico que estoy
 						interesado en todo el tema de la tecnología, siempre buscando soluciones para
 						automatizar tareas de manera simple. Con este incentivo comencé a programar, haciendo
 						aplicaciones básicas que den solución a problemas de la vida cotidiana. Con el tiempo
 						fui aprendiendo nuevos lenguajes y mejorando mis prácticas, por lo que en este momento
 						puedo crear soluciones más complejas, como páginas web, aplicaciones para Windows o
 						móviles, APIs y mucho más.
-						<br></br>A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
+						<br></br>
+						A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
 						titulo de Bachillerato con Orientación en Tecnologías de la Información y la
 						Comunicación. Actualmente estoy empezando la Licentura en Ciencias de la Computación en
 						la Universidad de Buenos Aires.
 					</p>
 				</div>
+
+				<Programming
+					className={styles["programming-svg"]}
+					id="programming-svg"
+					aria-label="Foto decorativa"
+				/>
 			</div>
 			<a className="scroll-down r" href="#skills" title="ir a la seccion habilidades">
 				<span>scroll down</span>

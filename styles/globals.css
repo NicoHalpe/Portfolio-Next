@@ -72,7 +72,7 @@ html[theme="dark"] {
 
 section {
 	position: relative;
-	min-height: 96vh;
+	min-height: 100vh;
 	background-color: var(--background-color);
 	padding: 2vh 6vw;
 }
