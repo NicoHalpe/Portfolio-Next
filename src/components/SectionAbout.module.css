@@ -21,7 +21,7 @@
 
 .about.visible .text {
 	opacity: 1;
-	animation: enter-right 0.9s ease-in-out;
+	animation: enter-left 0.9s ease-in-out;
 }
 .about .programming-svg,
 .about img {
@@ -31,7 +31,7 @@
 .about.visible .programming-svg,
 .about.visible img {
 	opacity: 1;
-	animation: enter-left 0.9s ease-in-out;
+	animation: enter-right 0.9s ease-in-out;
 }
 
 .about h2 {
