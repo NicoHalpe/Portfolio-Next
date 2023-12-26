@@ -133,7 +133,7 @@ const Card = ({ name, title, lenguajes, herramientas }: CardProps) => {
 		<Tilt className={styles.card}>
 			<div className={styles.header}>
 				<Image
-					src={`/img/${name}.svg`}
+					src={`/img/icons/${name}.svg`}
 					alt={name + " logo"}
 					title={name + " logo"}
 					height={52}
