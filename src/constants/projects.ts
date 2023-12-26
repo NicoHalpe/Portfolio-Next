@@ -4,7 +4,7 @@ const projects = [
 		description: "Recreación de la página de kubikware.",
 		stacks: ["HTML", "CSS", "JS"],
 		link: "https://kubikware.netlify.app/",
-		image: "/img/kubikware-remake.png",
+		image: "/img/projects/kubikware-remake.png",
 	},
 	{
 		title: "RL Stats",
@@ -12,7 +12,7 @@ const projects = [
 			"Una aplicación móvil que da acceso a cualquier persona a sus rangos de Rocket League desde su teléfono. Esta aplicación está pensada para todos los jugadores de Rocket League, aquí podrán seguir su progreso, encontrar sus rangos, sus estadísticas y sus partidos jugados. La solución consiste en 4 páginas, un inicio de sesión, una página principal, una de estadísticas y una de partidos.",
 		stacks: ["Flutter", "Dart", "RestAPI"],
 		link: "https://play.google.com/store/apps/details?id=com.drogebot.rocketleaguestats",
-		image: "/img/rocket stats.png",
+		image: "/img/projects/rocket stats.png",
 	},
 	{
 		title: "Satellites On Fire",
@@ -20,7 +20,7 @@ const projects = [
 			"Satellites On Fire es un sistema de detección en tiempo real de focos de calor, los cuales contemplan distintos niveles de probabilidad de ser incendios. El usuario puede observarlos en tiempo real, teniendo también la posibilidad de ver focos pasados. Adicionalmente, brindamos un sistema de alertas para que los usuarios puedan recibir notificaciones de los últimos focos detectados en sus zonas, permitiéndoles actuar a tiempo, reduciendo costos causados por la propagación de los incendios.",
 		stacks: ["Front-end dev", "React", "Material-UI"],
 		link: "https://www.satellitesonfire.com/",
-		image: "/img/sof.png",
+		image: "/img/projects/sof.png",
 	},
 	{
 		title: "Zerti",
@@ -28,7 +28,7 @@ const projects = [
 			"Zerti es un proyecto Web3 cuyo objetivo central es asegurar la validez y confianza de las certificaciones, aptitudes y títulos emitidos por las instituciones académicas, organizaciones y empresas, basándose en la inmutabilidad y transparencia de la tecnología blockchain.",
 		stacks: ["React", "Web3", "NodeJs"],
 		link: "https://zerti.com.ar/",
-		image: "/img/zerti.png",
+		image: "/img/projects/zerti.png",
 	},
 	{
 		title: "InFocus",
@@ -36,7 +36,7 @@ const projects = [
 			"Una página web que brinda herramientas de ayuda a jóvenes y adultos en etapa laboral con déficit de atención. Se brindan herramientas tales como recordatorios, organizadores, una sección de estudio (donde puedas establecer un tiempo de trabajo y te dé tiempos de recreo en proporción al trabajo y que te vaya guiando para que puedas lograr un estudio efectivo), una sección de ejercicios de relajación y por último una sección de notas para cuando el usuario esté en la escuela/trabajo, pueda tomar sus apuntes y tener todo organizado.",
 		stacks: ["React", "NodeJs", "Express"],
 		link: "https://infocusapp.netlify.app",
-		image: "/img/infocus.png",
+		image: "/img/projects/infocus.png",
 	},
 	{
 		title: "Calcular Fechas",
@@ -45,7 +45,7 @@ const projects = [
 		stacks: ["Android", "Kotlin", "Native App"],
 		link: "/files/CalcularFechas.apk",
 		download: true,
-		image: "/img/calcular-fechas.png",
+		image: "/img/projects/calcular-fechas.png",
 	},
 	{
 		title: "Wordle Infinito",
@@ -53,7 +53,7 @@ const projects = [
 			"Clásico juego de Wordle pero sacando la necesidad de esperar 24 horas para poder jugar con otra palabra.",
 		stacks: ["HTML", "CSS", "JS"],
 		link: "https://wordle.nicohalpe.com.ar/",
-		image: "/img/wordle.png",
+		image: "/img/projects/wordle.png",
 	},
 ];
 
