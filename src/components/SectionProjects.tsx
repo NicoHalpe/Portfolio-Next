@@ -458,9 +458,6 @@ function Project({
 						height={300}
 						className={styles["card-image"]}
 						src={image}
-						style={{
-							objectPosition: 0,
-						}}
 						alt={`${title} por nicolas halperin`}
 						priority={false}
 					/>
