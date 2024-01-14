@@ -1,0 +1,21 @@
+.button {
+	font-size: clamp(1rem, 3.5vw, 1.7rem);
+	width: -moz-fit-content;
+	width: fit-content;
+	border-radius: 5px;
+	border: 2px solid var(--color-accent);
+	color: var(--color-accent);
+	padding: 8px clamp(20px, 5vw, 35px);
+	text-decoration: none;
+	background-color: transparent;
+	align-self: flex-end;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.button:hover,
+.button:focus {
+	color: var(--button-focus-text-color);
+	box-shadow: inset 300px 0 0 0 var(--color-accent);
+	outline: none;
+}

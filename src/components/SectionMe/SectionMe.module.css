@@ -27,25 +27,6 @@
 	animation: enter-left 0.9s ease-in-out;
 }
 
-.me .content a {
-	font-size: clamp(1rem, 3.5vw, 1.7rem);
-	width: fit-content;
-	border-radius: 5px;
-	border: 2px solid var(--color-accent);
-	color: var(--color-accent);
-	padding: 8px 25px;
-	text-decoration: none;
-	margin-top: 3vh;
-	animation: enter-left 1.1s ease-in-out;
-}
-
-.me .content a:hover,
-.me .content a:focus {
-	color: var(--button-focus-text-color);
-	box-shadow: inset 300px 0 0 0 var(--color-accent);
-	outline: none;
-}
-
 .me .avatar {
 	width: 30%;
 	height: auto;
@@ -60,7 +41,10 @@
 .me .buttons {
 	display: flex;
 	flex-direction: row;
-	gap: 20px;
+	gap: clamp(0.5rem, 2vw, 1rem);
+	margin-top: 3vh;
+
+	animation: enter-left 0.9s ease-in-out;
 }
 
 @media only screen and (max-width: 800px) {

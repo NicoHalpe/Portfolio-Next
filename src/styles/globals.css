@@ -15,9 +15,9 @@
 	scroll-behavior: smooth;
 }
 
-*:not(#carrousel *) {
+/* *:not(#carrousel *) {
 	transition: color 0.5s, background-color 0.5s, box-shadow 0.5s, opacity 0.5s;
-}
+} */
 
 html,
 body {
@@ -72,7 +72,7 @@ html[theme="dark"] {
 
 section {
 	position: relative;
-	min-height: 100vh;
+	min-height: 96vh;
 	background-color: var(--background-color);
 	padding: 2vh 6vw;
 }

@@ -1,14 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import { useForm, ValidationError } from "@formspree/react";
 
 import styles from "./SectionContact.module.css";
-import useBouncingAnimation from "../../hooks/useBouncingAnimation";
+import useBouncingAnimation from "hooks/useBouncingAnimation";
+import Button from "components/Button";
 
 export default function SectionContact() {
 	const ref = useRef<HTMLElement>(null);
 	const submitMsgRef = useRef<HTMLDivElement>(null);
+	const errorMsgRef = useRef<HTMLDivElement>(null);
 	const formRef = useRef<HTMLFormElement>(null);
+
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
 	const [formState, submitForm] = useForm(process.env.NEXT_PUBLIC_FORM || "xnqyknlo");
@@ -23,9 +26,10 @@ export default function SectionContact() {
 		setTimeout(() => {
 			submitMsgRef.current?.classList.remove(styles.visible);
 			submitMsgRef.current?.classList.add(styles.leave);
-			setTimeout(() => {
+
+			submitMsgRef.current?.addEventListener("animationend", () => {
 				submitMsgRef.current?.classList.remove(styles.leave);
-			}, 800);
+			});
 		}, 3000);
 	}, [formState.succeeded]);
 
@@ -60,6 +64,19 @@ export default function SectionContact() {
 		document.querySelector("form").addEventListener("submit", handleSubmit);
 	}, []); */
 
+	useEffect(() => {
+		if (!formState.errors.length || formState.submitting) return;
+		errorMsgRef.current?.classList.add(styles.visible);
+		setTimeout(() => {
+			errorMsgRef.current?.classList.remove(styles.visible);
+			errorMsgRef.current?.classList.add(styles.leave);
+
+			errorMsgRef.current?.addEventListener("animationend", () => {
+				errorMsgRef.current?.classList.remove(styles.leave);
+			});
+		}, 3000);
+	}, [formState]);
+
 	return (
 		<section id="contact" className={styles.contact} ref={ref}>
 			<h2 className="spanText" ref={titleRef} aria-label="Contactame">
@@ -78,19 +95,25 @@ export default function SectionContact() {
 				<form ref={formRef} className={styles.form} name="contact" onSubmit={submitForm}>
 					<div className={styles.col}>
 						<input placeholder="Nombre" type="text" name="nombre" id="nombre" />
-						<ValidationError prefix="Nombre" field="nombre" errors={formState.errors} />
 						<input placeholder="Email" type="email" name="email" id="email" />
-						<ValidationError prefix="Email" field="email" errors={formState.errors} />
 					</div>
 					<input placeholder="Asunto" type="text" name="asunto" id="asunto" />
-					<ValidationError prefix="Asunto" field="asunto" errors={formState.errors} />
 					<textarea placeholder="Mensaje" name="mensaje" id="mensaje" rows={8}></textarea>
-					<ValidationError prefix="Mensaje" field="mensaje" errors={formState.errors} />
-					<button type="submit" disabled={formState.submitting}>
+					<Button type="submit" disabled={formState.submitting}>
 						¡Enviar!
-					</button>
-					<ValidationError errors={formState.errors} />
+					</Button>
 				</form>
+
+				<div className={styles["form-submit-wrapper"]} ref={submitMsgRef}>
+					<div className={styles["form-submit"]}>Gracias por tu mensaje!</div>
+				</div>
+
+				<div className={styles["form-submit-wrapper"]} ref={errorMsgRef}>
+					<div className={[styles["form-submit"], styles["form-submit-error"]].join(" ")}>
+						<ValidationError errors={formState.errors} />
+					</div>
+				</div>
+
 				<div className={styles.socials}>
 					<a
 						href="https://www.linkedin.com/in/nicolas-halperin/"
@@ -196,9 +219,6 @@ export default function SectionContact() {
 						</svg>
 						<span aria-label="nico halperin">Nico Halperin</span>
 					</a>
-				</div>
-				<div className={styles["form-submit-wrapper"]} ref={submitMsgRef}>
-					<div className={styles["form-submit"]}>Gracias por tu mensaje!</div>
 				</div>
 			</div>
 			<a className="scroll-up r" href="#me" title="volver al principio">

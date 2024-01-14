@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { spline } from "../../utils/spline";
+import { spline } from "utils/spline";
 import SimplexNoise from "simplex-noise";
-import Avatar from "./Avatar";
 
 import styles from "./SectionMe.module.css";
+import { Avatar, Button } from "components";
 
 type Point = {
 	x: number;
@@ -233,12 +233,12 @@ export default function SectionMe() {
 				</h1>
 				<p>Automatizando el mundo</p>
 				<div className={styles.buttons}>
-					<a href="#contact" title="ir a contacto">
+					<Button link href="#contact" title="ir a contacto">
 						Contactame
-					</a>
-					<a href="/Nicolas Halperin CV.pdf" download={true} title="descargar cv">
+					</Button>
+					<Button link href="/Nicolas Halperin CV.pdf" download={true} title="descargar cv">
 						Descargar CV
-					</a>
+					</Button>
 				</div>
 			</div>
 			<div

@@ -50,27 +50,6 @@
 	resize: none;
 }
 
-.contact button {
-	font-size: clamp(1rem, 3.5vw, 1.7rem);
-	width: fit-content;
-	border-radius: 5px;
-	border: 2px solid var(--color-accent);
-	color: var(--color-accent);
-	padding: 8px 35px;
-	text-decoration: none;
-	background-color: transparent;
-	align-self: flex-end;
-	cursor: pointer;
-	margin-top: 1vh;
-}
-
-.contact button:hover,
-.contact button:focus {
-	color: var(--button-focus-text-color);
-	box-shadow: inset 300px 0 0 0 var(--color-accent);
-	outline: none;
-}
-
 .contact .socials {
 	display: flex;
 	flex-direction: column;
@@ -127,6 +106,16 @@
 	border-radius: 5px;
 }
 
+.contact .form-submit.form-submit-error {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}
+
+.contact .form-submit.form-submit-error div {
+	color: inherit;
+}
+
 .contact .form-submit-wrapper.leave {
 	visibility: visible;
 	animation: leave 0.8s ease-out;
@@ -154,9 +143,6 @@
 	.contact .form-submit {
 		width: 80%;
 		height: 4vh;
-		background-color: #d4edda;
-		color: #155724;
-		border: 1px solid #c3e6cb;
 		display: flex;
 		align-items: center;
 		justify-content: center;

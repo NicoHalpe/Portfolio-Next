@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import Programming from "../../public/img/programming.svg";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
+import Programming from "assets/programming.svg";
 
 import styles from "./SectionAbout.module.css";
-import useBouncingAnimation from "../../hooks/useBouncingAnimation";
+import useBouncingAnimation from "hooks/useBouncingAnimation";
 
 export default function SectionAbout() {
 	const ref = useRef<HTMLElement>(null);

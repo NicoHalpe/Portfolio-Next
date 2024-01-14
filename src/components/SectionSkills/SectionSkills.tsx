@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 
 import styles from "./SectionSkills.module.css";
-import useBouncingAnimation from "../../hooks/useBouncingAnimation";
+import useBouncingAnimation from "hooks/useBouncingAnimation";
 
 export default function SectionSkills() {
 	const ref = useRef<HTMLElement>(null);
@@ -26,76 +26,78 @@ export default function SectionSkills() {
 			id="skills"
 			ref={ref}
 		>
-			<h2 className="spanText" ref={titleRef} aria-label="Habilidades">
-				<span>H</span>
-				<span>a</span>
-				<span>b</span>
-				<span>i</span>
-				<span>l</span>
-				<span>i</span>
-				<span>d</span>
-				<span>a</span>
-				<span>d</span>
-				<span>e</span>
-				<span>s</span>
-			</h2>
-			<div className={styles.cards}>
-				<Card
-					name={"back"}
-					title={"Back-end Developer"}
-					lenguajes={["Python", "Javascript"]}
-					herramientas={[
-						"Visual Studio Code",
-						"Node.js",
-						"Express",
-						"Flask",
-						"Postman",
-						"Heroku",
-						"Github",
-					]}
-				/>
-				<Card
-					name={"front"}
-					title={"Front-end Developer"}
-					lenguajes={["HTML", "CSS", "JSX"]}
-					herramientas={[
-						"Visual Studio Code",
-						"Bootsrap",
-						"Materialize",
-						"Material-UI",
-						"ReactJS",
-						"JQuery",
-						"Figma",
-						"Github",
-					]}
-				/>
-				<Card
-					name={"software"}
-					title={"Software Developer"}
-					lenguajes={["Dart", "Kotlin", "Java", "C#", "Javascript"]}
-					herramientas={[
-						"Visual Studio Code",
-						"Visual Studio",
-						"Android Studio",
-						"Flutter",
-						"Electron",
-						"Windows Presentations Framework",
-						"Github",
-					]}
-				/>
-				<Card
-					name={"blockchain"}
-					title={"Blockchain Developer"}
-					lenguajes={["Solidity", "Javascript"]}
-					herramientas={[
-						"Remix IDE",
-						"Web3.js",
-						"Metamask",
-						"Ethereum Mainnet",
-						"Goerli Testnet",
-						"Github",
-					]}
-				/>
+			<div className={styles.content}>
+				<h2 className="spanText" ref={titleRef} aria-label="Habilidades">
+					<span>H</span>
+					<span>a</span>
+					<span>b</span>
+					<span>i</span>
+					<span>l</span>
+					<span>i</span>
+					<span>d</span>
+					<span>a</span>
+					<span>d</span>
+					<span>e</span>
+					<span>s</span>
+				</h2>
+				<div className={styles.cards}>
+					<Card
+						name={"back"}
+						title={"Back-end Developer"}
+						lenguajes={["Python", "Javascript"]}
+						herramientas={[
+							"Visual Studio Code",
+							"Node.js",
+							"Express",
+							"Flask",
+							"Postman",
+							"Heroku",
+							"Github",
+						]}
+					/>
+					<Card
+						name={"front"}
+						title={"Front-end Developer"}
+						lenguajes={["HTML", "CSS", "JSX"]}
+						herramientas={[
+							"Visual Studio Code",
+							"Bootsrap",
+							"Materialize",
+							"Material-UI",
+							"ReactJS",
+							"JQuery",
+							"Figma",
+							"Github",
+						]}
+					/>
+					<Card
+						name={"software"}
+						title={"Software Developer"}
+						lenguajes={["Dart", "Kotlin", "Java", "C#", "Javascript"]}
+						herramientas={[
+							"Visual Studio Code",
+							"Visual Studio",
+							"Android Studio",
+							"Flutter",
+							"Electron",
+							"Windows Presentations Framework",
+							"Github",
+						]}
+					/>
+					<Card
+						name={"blockchain"}
+						title={"Blockchain Developer"}
+						lenguajes={["Solidity", "Javascript"]}
+						herramientas={[
+							"Remix IDE",
+							"Web3.js",
+							"Metamask",
+							"Ethereum Mainnet",
+							"Goerli Testnet",
+							"Github",
+						]}
+					/>
+				</div>
 			</div>
 			<a className="scroll-down r" href="#projects" title="ir a la seccion proyectos">
 				<span>scroll down</span>

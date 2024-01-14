@@ -1,8 +1,21 @@
+.skills {
+	display: flex;
+	align-items: center;
+}
+
+.skills .content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	gap: 5vh;
+}
+
 .skills h2 {
 	visibility: hidden;
 	font-size: clamp(2rem, 6vw, 4.5rem);
 	color: var(--color-accent);
-	margin-bottom: 5vh;
 }
 
 .skills .cards {
@@ -82,8 +95,17 @@
 	font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
+@media only screen and (max-width: 1400px) {
+	.skills .cards {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+	}
+}
+
 @media only screen and (max-width: 1000px) {
 	.skills .cards {
+		display: flex;
 		flex-direction: column;
 	}
 

@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { SwipeEventData, useSwipeable } from "react-swipeable";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import React, { useEffect, useState, useRef } from "react";
+import { useSwipeable } from "react-swipeable";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 
 import styles from "./SectionProjects.module.css";
-import useBouncingAnimation from "../../hooks/useBouncingAnimation";
-import projects from "../constants/projects";
+import useBouncingAnimation from "hooks/useBouncingAnimation";
+import projects from "constants/projects";
 
 type SwipeEvent = CustomEvent<{
 	// swipe direction
