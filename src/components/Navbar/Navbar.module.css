@@ -11,8 +11,7 @@
 	top: 2rem;
 
 	border-radius: 5.8125rem;
-	background: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
-		rgba(0, 0, 0, 0.2);
+	background: var(--navbar-background);
 
 	backdrop-filter: blur(10px);
 
@@ -30,24 +29,29 @@
 	padding: 0.5rem 1.5rem;
 	border-radius: 5rem;
 	cursor: pointer;
-    font-size: 1.1rem;
+	font-size: 1.1rem;
 }
 
 .navbar .items .item a {
 	color: #fff;
 	white-space: nowrap;
 	text-decoration: none;
+	transition: color 0.3s ease-in-out;
+}
+
+.navbar .items .item a {
+	color: var(--text-color);
 }
 
 .navbar .items .item:hover {
-	background: rgba(71, 71, 71, 0.8);
+	background: var(--navbar-marker-color-hover);
 }
 
 .navbar .items .marker {
 	position: absolute;
 	border-radius: 5rem;
 
-	background: #535353;
+	background: var(--navbar-marker-color);
 	z-index: -1;
 
 	list-style: none;
@@ -57,7 +61,8 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.navbar .menuIcon, .navbar .closeIcon {
+.navbar .menuIcon,
+.navbar .closeIcon {
 	display: none;
 }
 
@@ -75,57 +80,59 @@
 		border-radius: 50%;
 		cursor: pointer;
 
-        transition: width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out, top 0.3s ease-in-out, right 0.3s ease-in-out;
-        transition-delay: width 0.3s, height 0.3s;
+		transition: width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out,
+			top 0.3s ease-in-out, right 0.3s ease-in-out;
+		transition-delay: width 0.3s, height 0.3s;
 	}
 
-    .navbar.menuOpen {
+	.navbar.menuOpen {
 		height: 100vh;
-        height: 100dvh;
-		
-        width: 100vw;
-        top: 0;
-        right: 0;
-        border-radius: 0;
-        background: linear-gradient(0deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%), rgba(0, 0, 0, 0.60);
-        overflow: hidden;
-        cursor: default;
-    }
+		height: 100dvh;
 
-    .navbar.menuOpen .menuIcon {
-        display: none;
-    }
+		width: 100vw;
+		top: 0;
+		right: 0;
+		border-radius: 0;
+		background: var(--navbar-background);
+		overflow: hidden;
+		cursor: default;
+	}
 
-    .navbar.menuOpen .closeIcon {
-        display: block;
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        color: white;
-        font-size: 2rem;
-        cursor: pointer;
-    }
+	.navbar.menuOpen .menuIcon {
+		display: none;
+	}
 
-    .navbar.menuOpen .items {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
+	.navbar.menuOpen .closeIcon {
+		display: block;
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		color: var(--text-color);
+		font-size: 2rem;
+		cursor: pointer;
+	}
 
-    .navbar.menuOpen .items .item {
-        padding: 0.5rem 1rem;
-        border-radius: 0;
-        font-size: 2rem;
-    }
+	.navbar.menuOpen .items {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 2rem;
+	}
 
-    .navbar.menuOpen .items .item:hover, .navbar.menuOpen .items:not(:hover) .item.active {
-        background: none;
-        text-decoration: underline;
-        text-decoration-color: white;
-        text-underline-offset: 0.5rem;
-    }
+	.navbar.menuOpen .items .item {
+		padding: 0.5rem 1rem;
+		border-radius: 0;
+		font-size: 2rem;
+	}
+
+	.navbar.menuOpen .items .item:hover,
+	.navbar.menuOpen .items:not(:hover) .item.active {
+		background: none;
+		text-decoration: underline;
+		text-decoration-color: var(--text-color);
+		text-underline-offset: 0.5rem;
+	}
 
 	.navbar .items {
 		display: none;
@@ -133,10 +140,10 @@
 
 	.navbar .menuIcon {
 		display: flex;
-		color: white;
+		color: var(--text-color);
 	}
 
-    .navbar .marker {
-        display: none;
-    }
+	.navbar .marker {
+		display: none;
+	}
 }

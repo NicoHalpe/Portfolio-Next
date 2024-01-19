@@ -36,6 +36,11 @@ html[theme="light"] {
 	--form-text-color: #4e4e4e;
 	--chip-background-color: #c5c5c5;
 	--card-after-color: rgba(255, 255, 255, 0.3);
+
+	--navbar-background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
+		rgba(255, 255, 255, 0.4);
+	--navbar-marker-color: rgb(185, 185, 185);
+	--navbar-marker-color-hover: rgba(83, 83, 83, 0.2);
 }
 
 html[theme="dark"] {
@@ -50,6 +55,15 @@ html[theme="dark"] {
 	--chip-background-color: white;
 	--card-after-color: rgba(29, 29, 29, 0.5);
 	fill: #155724;
+
+	--navbar-background: linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			rgba(255, 255, 255, 0.1) 100%
+		),
+		rgba(0, 0, 0, 0.2);
+	--navbar-marker-color: rgb(83, 83, 83);
+	--navbar-marker-color-hover: rgba(83, 83, 83, 0.5);
 }
 
 .spanText {
