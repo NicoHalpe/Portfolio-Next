@@ -26,13 +26,13 @@
 
 .navbar .items .item {
 	display: flex;
-	padding: 0.5rem 1.5rem;
 	border-radius: 5rem;
 	cursor: pointer;
 	font-size: 1.1rem;
 }
 
 .navbar .items .item a {
+	padding: 0.5rem 1.5rem;
 	color: #fff;
 	white-space: nowrap;
 	text-decoration: none;
