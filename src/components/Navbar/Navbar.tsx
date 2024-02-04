@@ -77,12 +77,12 @@ export default function Navbar({}: Props) {
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
-	}, [activeLink]);
+	}, [activeLink, isMobile]);
 
 	useEffect(() => {
 		if (!menuOpen) document.documentElement.style.overflow = "";
 		else document.documentElement.style.overflow = "hidden";
-	}, [menuOpen, isMobile]);
+	}, [menuOpen]);
 
 	const handleOpenMenu: React.MouseEventHandler<HTMLElement> = (e) => {
 		setMenuOpen(true);
