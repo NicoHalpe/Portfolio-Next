@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 import { useMediaQuery } from "hooks/useMediaQuery";
 
@@ -32,6 +32,9 @@ export default function Navbar({}: Props) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
+	const marker = useRef<HTMLLIElement>(null);
+	const itemsContainer = useRef<HTMLUListElement>(null);
+
 	useEffect(() => {
 		const handleScroll = () => {
 			const sections = document.querySelectorAll("section");
@@ -55,21 +58,21 @@ export default function Navbar({}: Props) {
 	}, []);
 
 	useEffect(() => {
-		const marker = document.querySelector(`.${styles.marker}`) as HTMLElement;
-		const items = document.querySelectorAll(`.${styles.item}`) as NodeListOf<HTMLElement>;
+		const items = itemsContainer.current?.childNodes as NodeListOf<HTMLElement>;
 
-		if (!marker || !items) return;
+		if (!marker.current || !items) return;
 
 		const activeItem = items[activeLink];
 
-		marker.style.width = `${activeItem.offsetWidth}px`;
-		marker.style.height = `${activeItem.offsetHeight}px`;
-		marker.style.left = `${activeItem.offsetLeft}px`;
+		marker.current.style.width = `${activeItem.offsetWidth}px`;
+		marker.current.style.height = `${activeItem.offsetHeight}px`;
+		marker.current.style.left = `${activeItem.offsetLeft}px`;
 
 		const handleResize = () => {
-			marker.style.width = `${activeItem.offsetWidth}px`;
-			marker.style.height = `${activeItem.offsetHeight}px`;
-			marker.style.left = `${activeItem.offsetLeft}px`;
+			if (!marker.current) return;
+			marker.current.style.width = `${activeItem.offsetWidth}px`;
+			marker.current.style.height = `${activeItem.offsetHeight}px`;
+			marker.current.style.left = `${activeItem.offsetLeft}px`;
 		};
 
 		window.addEventListener("resize", handleResize);
@@ -77,7 +80,7 @@ export default function Navbar({}: Props) {
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
-	}, [activeLink, isMobile]);
+	}, [activeLink]);
 
 	useEffect(() => {
 		if (!menuOpen) document.documentElement.style.overflow = "";
@@ -99,7 +102,7 @@ export default function Navbar({}: Props) {
 			className={`${styles.navbar} ${menuOpen ? styles.menuOpen : ""}`}
 			onClick={isMobile ? handleOpenMenu : undefined}
 		>
-			<ul className={styles.items}>
+			<ul className={styles.items} ref={itemsContainer}>
 				{links.map((link, i) => {
 					const active = i === activeLink ? styles.active : "";
 					return (
@@ -109,7 +112,7 @@ export default function Navbar({}: Props) {
 					);
 				})}
 
-				<li className={styles.marker}></li>
+				<li className={styles.marker} ref={marker}></li>
 			</ul>
 
 			<div className={styles.menuIcon}>
