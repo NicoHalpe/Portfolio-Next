@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useEffect } from "react";
 
-import SectionMe from "components/SectionMe/SectionMe";
-import SectionAbout from "components/SectionAbout/SectionAbout";
-import SectionSkills from "components/SectionSkills/SectionSkills";
-import SectionProjects from "components/SectionProjects/SectionProjects";
-import SectionContact from "components/SectionContact/SectionContact";
+import SectionMe from "components/Sections/SectionMe/SectionMe";
+import SectionAbout from "components/Sections/SectionAbout/SectionAbout";
+import SectionSkills from "components/Sections/SectionSkills/SectionSkills";
+import SectionProjects from "components/Sections/SectionProjects/SectionProjects";
+import SectionContact from "components/Sections/SectionContact/SectionContact";
 import { Navbar } from "components";
 
 export default function Home() {

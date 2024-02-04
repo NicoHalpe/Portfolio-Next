@@ -1,0 +1,89 @@
+.projects {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	opacity: 0;
+	transition: 1s;
+	padding: 2vh 0;
+}
+
+.projects.visible {
+	opacity: 1;
+}
+
+.projects h2 {
+	font-size: clamp(2rem, 6vw, 4.5rem);
+	color: var(--color-accent);
+	margin-bottom: 5vh;
+	padding: 0 6vw;
+}
+
+.projects .carrousel {
+	width: 450px;
+	height: fit-content;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	/* overflow: hidden; */
+}
+
+.projects .carrousel .navigation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.projects .carrousel .navigation .arrow {
+	height: 1.5em;
+	width: 1.5em;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--text-color);
+	border: none;
+	cursor: pointer;
+}
+
+.projects .carrousel .dots {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.projects .carrousel .dots .dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: var(--text-color);
+	cursor: pointer;
+}
+
+.projects .carrousel .dots .dot.active {
+	background-color: var(--color-accent);
+}
+
+.projects .cards {
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	gap: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+	.projects .carrousel {
+		width: 100vw;
+		overflow: hidden;
+	}
+
+	.projects .carrousel.visible {
+		animation: move-center 1s ease-in-out;
+	}
+
+	.projects .cards .card {
+		background-color: var(--background-color);
+		width: 80vw;
+		box-sizing: border-box;
+	}
+}

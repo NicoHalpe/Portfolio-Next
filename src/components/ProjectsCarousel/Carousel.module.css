@@ -1,0 +1,55 @@
+.embla {
+	display: flex;
+	flex-direction: column;
+	gap: 1.6rem;
+}
+
+.embla__viewport {
+	overflow: hidden;
+}
+
+.embla__container {
+	backface-visibility: hidden;
+	display: flex;
+	touch-action: pan-y;
+}
+
+.embla__slide {
+	display: flex;
+}
+
+.navigation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.navigation .arrow {
+	height: 1.5em;
+	width: 1.5em;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--text-color);
+	border: none;
+	cursor: pointer;
+}
+
+.dots {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.dots .dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: var(--text-color);
+	cursor: pointer;
+}
+
+.dots .dot.active {
+	background-color: var(--color-accent);
+}

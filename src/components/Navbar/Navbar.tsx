@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
+import { useMediaQuery } from "hooks/useMediaQuery";
 
 type Props = {};
 
@@ -27,10 +28,11 @@ const links = [
 ];
 
 export default function Navbar({}: Props) {
-	const [activeLink, setActiveLink] = React.useState(0);
-	const [menuOpen, setMenuOpen] = React.useState(false);
+	const [activeLink, setActiveLink] = useState(0);
+	const [menuOpen, setMenuOpen] = useState(false);
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const handleScroll = () => {
 			const sections = document.querySelectorAll("section");
 			sections.forEach((section) => {
@@ -80,7 +82,7 @@ export default function Navbar({}: Props) {
 	useEffect(() => {
 		if (!menuOpen) document.documentElement.style.overflow = "";
 		else document.documentElement.style.overflow = "hidden";
-	}, [menuOpen]);
+	}, [menuOpen, isMobile]);
 
 	const handleOpenMenu: React.MouseEventHandler<HTMLElement> = (e) => {
 		setMenuOpen(true);
@@ -93,7 +95,10 @@ export default function Navbar({}: Props) {
 	};
 
 	return (
-		<nav className={`${styles.navbar} ${menuOpen ? styles.menuOpen : ""}`} onClick={handleOpenMenu}>
+		<nav
+			className={`${styles.navbar} ${menuOpen ? styles.menuOpen : ""}`}
+			onClick={isMobile ? handleOpenMenu : undefined}
+		>
 			<ul className={styles.items}>
 				{links.map((link, i) => {
 					const active = i === activeLink ? styles.active : "";
