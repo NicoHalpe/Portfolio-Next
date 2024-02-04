@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import { useDotButton } from "./DotButton";
-import { usePrevNextButtons } from "./ArrowButton";
+import { useDotButton } from "hooks/useDotButton";
+import { usePrevNextButtons } from "hooks/usePrevNextButtons";
 import { Project } from "components";
-import styles from "./Carousel.module.css";
+import styles from "./ProjectsCarousel.module.css";
 
 type ProjectType = {
 	title: string;
