@@ -44,7 +44,7 @@
 }
 
 .about p {
-	font-size: clamp(1rem, 2vw, 1.5rem);
+	font-size: clamp(1rem, 1.6vw, 1.7rem);
 	text-align: start;
 	color: var(--paragraph-color);
 	line-height: 1.3;
