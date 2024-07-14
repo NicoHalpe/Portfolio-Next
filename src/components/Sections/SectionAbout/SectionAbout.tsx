@@ -7,7 +7,7 @@ import useBouncingAnimation from "hooks/useBouncingAnimation";
 import Image from "next/image";
 
 export default function SectionAbout() {
-	const today = new Date();
+	/* const today = new Date();
 
 	const calcYears = (date: Date) => {
 		return (
@@ -21,7 +21,7 @@ export default function SectionAbout() {
 	const age = calcYears(birthday);
 
 	const startedProgramming = new Date("2020-01-01");
-	const yearsProgramming = today.getFullYear() - startedProgramming.getFullYear();
+	const yearsProgramming = today.getFullYear() - startedProgramming.getFullYear(); */
 
 	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
@@ -44,7 +44,7 @@ export default function SectionAbout() {
 						<span>í</span>
 					</h2>
 					<p>
-						Soy <b>Nicolás Halperin</b>, tengo {age} años y desde hace {yearsProgramming} que me
+						Soy <b>Nicolás Halperin</b>, tengo {19} años y desde hace {5} que me
 						estoy adentrando en el mundo de la programación y el desarrollo de manera autodidácta.
 						<br></br>
 						Desde chico que estoy interesado en todo el tema de la tecnología, siempre buscando
