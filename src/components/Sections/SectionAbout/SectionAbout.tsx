@@ -64,7 +64,7 @@ export default function SectionAbout() {
 					className={styles["programming-svg"]}
 					src={Programming}
 					alt="Foto decorativa"
-					priority={false}
+					priority={true}
 				/>
 
 				{/* <Programming
