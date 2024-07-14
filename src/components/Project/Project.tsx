@@ -39,6 +39,9 @@ export default function Project({
 						src={image}
 						alt={`${title} por nicolas halperin`}
 						priority={false}
+						width={600}
+						height={400}
+						sizes="(max-width: 1000px) 90vw, (max-width: 1400px) 33vw, 25vw"
 					/>
 					<div className={styles.hover}>
 						{download ? (
