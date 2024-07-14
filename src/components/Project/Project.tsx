@@ -35,8 +35,6 @@ export default function Project({
 					title={`link ${download ? "de descarga" : ""} a ${title} por nicolas halperin`}
 				>
 					<Image
-						width={460}
-						height={300}
 						className={styles["card-image"]}
 						src={image}
 						alt={`${title} por nicolas halperin`}
