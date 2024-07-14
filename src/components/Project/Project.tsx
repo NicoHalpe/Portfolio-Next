@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 import styles from "./Project.module.css";
 
@@ -6,12 +6,13 @@ type Props = {
 	title: string;
 	description: string;
 	stacks: string[];
-	image: string;
+	image: StaticImageData;
 	link: string;
 	download?: boolean;
 	selected?: boolean;
 	onClick?: () => void;
 };
+
 export default function Project({
 	title,
 	description,

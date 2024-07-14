@@ -5,12 +5,13 @@ import { useDotButton } from "hooks/useDotButton";
 import { usePrevNextButtons } from "hooks/usePrevNextButtons";
 import { Project } from "components";
 import styles from "./ProjectsCarousel.module.css";
+import { StaticImageData } from "next/image";
 
 type ProjectType = {
 	title: string;
 	description: string;
 	stacks: string[];
-	image: string;
+	image: StaticImageData;
 	link: string;
 	download?: boolean;
 };
