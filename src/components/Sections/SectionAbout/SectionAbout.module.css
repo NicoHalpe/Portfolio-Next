@@ -26,7 +26,10 @@
 .about .programming-svg,
 .about img {
 	width: 30%;
+	padding: 2vw;
 	height: auto;
+	filter: var(--invert-filter);
+	box-sizing: border-box;
 }
 .about.visible .programming-svg,
 .about.visible img {

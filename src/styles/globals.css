@@ -41,6 +41,8 @@ html[theme="light"] {
 		rgba(255, 255, 255, 0.4);
 	--navbar-marker-color: rgb(185, 185, 185);
 	--navbar-marker-color-hover: rgba(83, 83, 83, 0.2);
+
+	--invert-filter: invert(0);
 }
 
 html[theme="dark"] {
@@ -64,6 +66,8 @@ html[theme="dark"] {
 		rgba(0, 0, 0, 0.2);
 	--navbar-marker-color: rgb(83, 83, 83);
 	--navbar-marker-color-hover: rgba(83, 83, 83, 0.5);
+
+	--invert-filter: invert(1);
 }
 
 .spanText {

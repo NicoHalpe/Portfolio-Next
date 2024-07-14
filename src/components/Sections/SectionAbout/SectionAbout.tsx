@@ -1,9 +1,26 @@
 import React, { useRef } from "react";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
-import Programming from "assets/programming.svg";
+import Programming from "assets/programming.png";
 
 import styles from "./SectionAbout.module.css";
 import useBouncingAnimation from "hooks/useBouncingAnimation";
+import Image from "next/image";
+
+const today = new Date();
+
+const calcYears = (date: Date) => {
+	return (
+		today.getFullYear() -
+		date.getFullYear() -
+		(today < new Date(today.getFullYear(), date.getMonth(), date.getDate()) ? 1 : 0)
+	);
+};
+
+const birthday = new Date("2005-05-01");
+const age = calcYears(birthday);
+
+const startedProgramming = new Date("2020-01-01");
+const yearsProgramming = today.getFullYear() - startedProgramming.getFullYear();
 
 export default function SectionAbout() {
 	const ref = useRef<HTMLElement>(null);
@@ -27,29 +44,34 @@ export default function SectionAbout() {
 						<span>í</span>
 					</h2>
 					<p>
-						Soy <b>Nicolás Halperin</b>, tengo 18 años y desde hace 5 que me estoy adentrando en el
-						mundo de la programación y el desarrollo de manera autodidácta. 
+						Soy <b>Nicolás Halperin</b>, tengo {age} años y desde hace {yearsProgramming} que me
+						estoy adentrando en el mundo de la programación y el desarrollo de manera autodidácta.
 						<br></br>
-						Desde chico que estoy
-						interesado en todo el tema de la tecnología, siempre buscando soluciones para
-						automatizar tareas de manera simple. Con este incentivo comencé a programar, haciendo
-						aplicaciones básicas que den solución a problemas de la vida cotidiana. Con el tiempo
-						fui aprendiendo nuevos lenguajes y mejorando mis prácticas, por lo que en este momento
-						puedo crear soluciones más complejas, como páginas web, aplicaciones para Windows o
-						móviles, APIs y mucho más.
-						<br></br>
-						A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
+						Desde chico que estoy interesado en todo el tema de la tecnología, siempre buscando
+						soluciones para automatizar tareas de manera simple. Con este incentivo comencé a
+						programar, haciendo aplicaciones básicas que den solución a problemas de la vida
+						cotidiana. Con el tiempo fui aprendiendo nuevos lenguajes y mejorando mis prácticas, por
+						lo que en este momento puedo crear soluciones más complejas, como páginas web,
+						aplicaciones para Windows o móviles, APIs y mucho más.
+						<br></br>A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
 						titulo de Bachillerato con Orientación en Tecnologías de la Información y la
 						Comunicación. Actualmente estoy empezando la Licentura en Ciencias de la Computación en
 						la Universidad de Buenos Aires.
 					</p>
 				</div>
 
-				<Programming
+				<Image
+					className={styles["programming-svg"]}
+					src={Programming}
+					alt="Foto decorativa"
+					priority={false}
+				/>
+
+				{/* <Programming
 					className={styles["programming-svg"]}
 					id="programming-svg"
 					aria-label="Foto decorativa"
-				/>
+				/> */}
 			</div>
 			<a className="scroll-down r" href="#skills" title="ir a la seccion habilidades">
 				<span>scroll down</span>
