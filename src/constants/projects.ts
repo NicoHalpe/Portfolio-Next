@@ -1,10 +1,10 @@
-import kubikware from "../img/projects/kubikware-remake.png";
-import rocketStats from "../img/projects/rocket stats.png";
-import sof from "../img/projects/sof.png";
-import zerti from "../img/projects/zerti.png";
-import infocus from "../img/projects/infocus.png";
-import calcularFechas from "../img/projects/calcular-fechas.png";
-import wordle from "../img/projects/wordle.png";
+import kubikware from "../../public/img/projects/kubikware-remake.png";
+import rocketStats from "../../public/img/projects/rocket-stats.png";
+import sof from "../../public/img/projects/sof.png";
+import zerti from "../../public/img/projects/zerti.png";
+import infocus from "../../public/img/projects/infocus.png";
+import calcularFechas from "../../public/img/projects/calcular-fechas.png";
+import wordle from "../../public/img/projects/wordle.png";
 
 const projects = [
 	{
