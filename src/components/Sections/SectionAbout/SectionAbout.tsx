@@ -6,23 +6,23 @@ import styles from "./SectionAbout.module.css";
 import useBouncingAnimation from "hooks/useBouncingAnimation";
 import Image from "next/image";
 
-const today = new Date();
-
-const calcYears = (date: Date) => {
-	return (
-		today.getFullYear() -
-		date.getFullYear() -
-		(today < new Date(today.getFullYear(), date.getMonth(), date.getDate()) ? 1 : 0)
-	);
-};
-
-const birthday = new Date("2005-05-01");
-const age = calcYears(birthday);
-
-const startedProgramming = new Date("2020-01-01");
-const yearsProgramming = today.getFullYear() - startedProgramming.getFullYear();
-
 export default function SectionAbout() {
+	const today = new Date();
+
+	const calcYears = (date: Date) => {
+		return (
+			today.getFullYear() -
+			date.getFullYear() -
+			(today < new Date(today.getFullYear(), date.getMonth(), date.getDate()) ? 1 : 0)
+		);
+	};
+
+	const birthday = new Date("2005-06-01");
+	const age = calcYears(birthday);
+
+	const startedProgramming = new Date("2020-01-01");
+	const yearsProgramming = today.getFullYear() - startedProgramming.getFullYear();
+
 	const ref = useRef<HTMLElement>(null);
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
