@@ -180,7 +180,7 @@ export default function SectionMe() {
 		setNoiseStep(0.001);
 	};
 
-	const avatarClick = () => {
+	const switchTheme = () => {
 		const theme = document.documentElement.getAttribute("theme");
 		document.documentElement.setAttribute("theme", theme === "dark" ? "light" : "dark");
 		const colorAccent = getComputedStyle(document.documentElement).getPropertyValue(
@@ -188,6 +188,13 @@ export default function SectionMe() {
 		);
 		avatar?.querySelector("path")?.setAttribute("fill", colorAccent);
 		setLight(theme === "dark" ? true : false);
+	};
+
+	const avatarClick = () => {
+		// @ts-ignore
+		if (!document.startViewTransition) switchTheme();
+		// @ts-ignore
+		else document.startViewTransition(switchTheme);
 	};
 
 	return (
