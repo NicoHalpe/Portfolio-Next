@@ -31,6 +31,13 @@
 	filter: var(--invert-filter);
 	box-sizing: border-box;
 }
+
+.about:not(.visible) .programming-svg,
+.about:not(.visible) img,
+.about:not(.visible) .text {
+	opacity: 0;
+}
+
 .about.visible .programming-svg,
 .about.visible img {
 	opacity: 1;
