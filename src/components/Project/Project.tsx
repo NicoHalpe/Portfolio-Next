@@ -89,7 +89,7 @@ export default function Project({
 			<div className={styles["card-stacks"]}>
 				{stacks.map((stack) => (
 					<div className={styles.chip} key={stack}>
-						#{stack}
+						{stack}
 					</div>
 				))}
 			</div>
