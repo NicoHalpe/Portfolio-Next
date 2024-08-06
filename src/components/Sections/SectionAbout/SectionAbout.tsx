@@ -54,8 +54,8 @@ export default function SectionAbout() {
 						lo que en este momento puedo crear soluciones más complejas, como páginas web,
 						aplicaciones para Windows o móviles, APIs y mucho más.
 						<br></br>A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
-						titulo de Bachillerato con Orientación en Tecnologías de la Información y la
-						Comunicación. Actualmente estoy empezando la Licentura en Ciencias de la Computación en
+						título de Bachillerato con Orientación en Tecnologías de la Información y la
+						Comunicación. Actualmente estoy empezando la Licenciatura en Ciencias de la Computación en
 						la Universidad de Buenos Aires.
 					</p>
 				</div>
