@@ -94,11 +94,11 @@
 .card .card-stacks .chip {
 	height: fit-content;
 	width: fit-content;
-	border: 1px solid var(--chip-background-color);
+	border: 1px solid var(--text-color);
 	padding: 5px 15px;
 	border-radius: 50px;
 	text-align: center;
-	color: var(--chip-background-color);
+	color: var(--text-color);
 	font-family: Verdana, sans-serif;
 	white-space: nowrap;
 	font-size: clamp(0.8rem, 2vw, 1rem);
