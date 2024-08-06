@@ -4,6 +4,7 @@ import SimplexNoise from "simplex-noise";
 
 import styles from "./SectionMe.module.css";
 import { Avatar, Button } from "components";
+import useTheme from "hooks/useTheme";
 
 type Point = {
 	x: number;
@@ -25,6 +26,8 @@ export default function SectionMe() {
 	const [avatar, setAvatar] = useState<HTMLDivElement>();
 
 	const [light, setLight] = useState(false);
+
+	const { theme, switchTheme } = useTheme();
 
 	function map(n: number, start1: number, end1: number, start2: number, end2: number) {
 		return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
@@ -180,22 +183,13 @@ export default function SectionMe() {
 		setNoiseStep(0.001);
 	};
 
-	const switchTheme = () => {
-		const theme = document.documentElement.getAttribute("theme");
-		document.documentElement.setAttribute("theme", theme === "dark" ? "light" : "dark");
+	useEffect(() => {
 		const colorAccent = getComputedStyle(document.documentElement).getPropertyValue(
 			"--color-accent"
 		);
 		avatar?.querySelector("path")?.setAttribute("fill", colorAccent);
-		setLight(theme === "dark" ? true : false);
-	};
-
-	const avatarClick = () => {
-		// @ts-ignore
-		if (!document.startViewTransition) switchTheme();
-		// @ts-ignore
-		else document.startViewTransition(switchTheme);
-	};
+		setLight(theme === "light" ? true : false);
+	}, [avatar, theme]);
 
 	return (
 		<section className={styles.me} id="me">
@@ -251,7 +245,7 @@ export default function SectionMe() {
 			<div
 				ref={hoverElementRef}
 				className={styles.hoverelement}
-				onClick={avatarClick}
+				onClick={switchTheme}
 				onMouseOver={setFastNoiseStep}
 				onMouseLeave={setSlowNoiseStep}
 			></div>

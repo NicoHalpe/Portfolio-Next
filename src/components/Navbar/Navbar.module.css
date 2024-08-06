@@ -66,6 +66,17 @@
 	display: none;
 }
 
+.navbar .themeIcon {
+	height: 36px;
+	padding: 5px;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+	list-style: none;
+	color: var(--text-color);
+
+	box-sizing: border-box;
+}
+
 @media screen and (max-width: 768px) {
 	.navbar {
 		display: grid;

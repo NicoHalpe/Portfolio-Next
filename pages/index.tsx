@@ -28,7 +28,7 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta
 					name="description"
-					content="Soy Nico Halperin, Full Stack Developer y Software Developer. Este es mi portafolio."
+					content="Soy Nico Halperin, Full Stack & Web3 Developer. Este es mi portafolio."
 				/>
 				<meta name="title" content="Nicolas Halperin | Full Stack Developer" />
 				<meta name="author" content="Nicolas Halperin" />
@@ -38,7 +38,7 @@ export default function Home() {
 				<meta name="og:title" content="Nicolas Halperin" />
 				<meta
 					name="og:description"
-					content="Soy Nico Halperin, Full stack developer y Software developer. Este es mi portafolio."
+					content="Soy Nico Halperin, Full Stack & Web3 Developer. Este es mi portafolio."
 				/>
 				<meta name="og:site_name" content="Nicolas Halperin" />
 				<meta name="og:image" content="https://nicohalpe.com.ar/img/demo.png" />
