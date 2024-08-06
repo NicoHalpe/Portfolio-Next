@@ -1,9 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useTheme = () => {
 	const [theme, setTheme] = useState<string | null>(null);
+
+	const changeTheme = (newTheme: string) => () => {
+		document.documentElement.setAttribute("theme", newTheme);
+	};
+
+	const transitionToTheme = (func: () => void) => {
+		// @ts-ignore
+		if (!document.startViewTransition) func();
+		// @ts-ignore
+		else document.startViewTransition(() => func());
+	};
 
 	useEffect(() => {
 		const observer = new MutationObserver((mutations) => {
@@ -19,7 +30,7 @@ const useTheme = () => {
 
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-			document.documentElement.setAttribute("theme", theme);
+			transitionToTheme(changeTheme(theme));
 		});
 
 		return () => {
@@ -34,9 +45,9 @@ const useTheme = () => {
 
 		const localTheme = localStorage.getItem("theme");
 
-		if (!localTheme) document.documentElement.setAttribute("theme", systemTheme);
-		else document.documentElement.setAttribute("theme", localTheme);
-	}, [theme]);
+		if (!localTheme) transitionToTheme(changeTheme(systemTheme));
+		else transitionToTheme(changeTheme(localTheme));
+	}, []);
 
 	const switchTheme = () => {
 		const theme = document.documentElement.getAttribute("theme");
