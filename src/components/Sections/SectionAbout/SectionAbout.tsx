@@ -43,21 +43,26 @@ export default function SectionAbout() {
 						<span>M</span>
 						<span>í</span>
 					</h2>
-					<p>
-						Soy <b>Nicolás Halperin</b>, tengo {19} años y desde hace {5} que me
-						estoy adentrando en el mundo de la programación y el desarrollo de manera autodidácta.
-						<br></br>
-						Desde chico que estoy interesado en todo el tema de la tecnología, siempre buscando
-						soluciones para automatizar tareas de manera simple. Con este incentivo comencé a
-						programar, haciendo aplicaciones básicas que den solución a problemas de la vida
-						cotidiana. Con el tiempo fui aprendiendo nuevos lenguajes y mejorando mis prácticas, por
-						lo que en este momento puedo crear soluciones más complejas, como páginas web,
-						aplicaciones para Windows o móviles, APIs y mucho más.
-						<br></br>A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el
-						título de Bachillerato con Orientación en Tecnologías de la Información y la
-						Comunicación. Actualmente estoy empezando la Licenciatura en Ciencias de la Computación en
-						la Universidad de Buenos Aires.
-					</p>
+					<div className={styles.paragraphs}>
+						<p>
+							Soy <b>Nicolás Halperin</b>, tengo {19} años y desde hace {5} que me estoy adentrando
+							en el mundo de la programación y el desarrollo de manera autodidácta.
+						</p>
+						<p>
+							Desde chico que estoy interesado en todo el tema de la tecnología, siempre buscando
+							soluciones para automatizar tareas de manera simple. Con este incentivo comencé a
+							programar, haciendo aplicaciones básicas que den solución a problemas de la vida
+							cotidiana. Con el tiempo fui aprendiendo nuevos lenguajes y mejorando mis prácticas,
+							por lo que en este momento puedo crear soluciones más complejas, como páginas web,
+							aplicaciones para Windows o móviles, APIs y mucho más.
+						</p>
+						<p>
+							A nivel académico, me egresé con honores de la Escuela ORT, recibiendo el título de
+							Bachillerato con Orientación en Tecnologías de la Información y la Comunicación.
+							Actualmente estoy empezando la Licenciatura en Ciencias de la Computación en la
+							Universidad de Buenos Aires.
+						</p>
+					</div>
 				</div>
 
 				<Image
