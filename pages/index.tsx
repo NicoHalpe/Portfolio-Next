@@ -43,9 +43,9 @@ export default function Home() {
 				<meta name="og:site_name" content="Nicolas Halperin" />
 				<meta name="og:image" content="https://nicohalpe.com.ar/img/demo.png" />
 				<meta name="og:image:secure_url" content="https://nicohalpe.com.ar/img/demo.png" />
-				<meta name="og:type" content="profile" />
-				<meta name="og:image:width" content="1657" />
-				<meta name="og:image:height" content="911" />
+				<meta name="og:type" content="website" />
+				<meta name="og:image:width" content="1920" />
+				<meta name="og:image:height" content="1080" />
 
 				<link rel="canonical" href="https://nicohalpe.com.ar/" />
 
