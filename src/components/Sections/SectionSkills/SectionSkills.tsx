@@ -44,57 +44,58 @@ export default function SectionSkills() {
 					<Card
 						name={"back"}
 						title={"Back-end Developer"}
-						lenguajes={["Python", "Javascript"]}
+						lenguajes={["Python", "TypeScript"]}
 						herramientas={[
-							"Visual Studio Code",
 							"Node.js",
-							"Express",
+							"Express.js",
 							"Flask",
+							"Docker",
+							"MongoDB",
+							"PostgreSQL",
 							"Postman",
-							"Heroku",
-							"Github",
+							"AWS",
 						]}
 					/>
 					<Card
 						name={"front"}
 						title={"Front-end Developer"}
-						lenguajes={["HTML", "CSS", "JSX"]}
+						lenguajes={["HTML", "CSS", "TSX"]}
 						herramientas={[
-							"Visual Studio Code",
 							"Bootsrap",
 							"Materialize",
 							"Material-UI",
 							"ReactJS",
 							"JQuery",
-							"Figma",
-							"Github",
+							"Storybook",
+							"Next.js",
+							"Tailwind CSS",
 						]}
 					/>
 					<Card
 						name={"software"}
 						title={"Software Developer"}
-						lenguajes={["Dart", "Kotlin", "Java", "C#", "Javascript"]}
+						lenguajes={["Dart", "Kotlin", "Swift", "Java", "C#", "TS"]}
 						herramientas={[
-							"Visual Studio Code",
-							"Visual Studio",
-							"Android Studio",
 							"Flutter",
 							"Electron",
-							"Windows Presentations Framework",
-							"Github",
+							"WPF",
+							"Android Studio",
+							"Visual Studio",
+							"Xcode",
 						]}
 					/>
 					<Card
 						name={"blockchain"}
-						title={"Blockchain Developer"}
-						lenguajes={["Solidity", "Javascript"]}
+						title={"Blockchain/Web3 Developer"}
+						lenguajes={["Solidity", "TypeScript"]}
 						herramientas={[
 							"Remix IDE",
 							"Web3.js",
+							"Ethers.js",
+							"Hardhat",
+							"Alchemy",
+							"Infura",
 							"Metamask",
-							"Ethereum Mainnet",
-							"Goerli Testnet",
-							"Github",
 						]}
 					/>
 				</div>
