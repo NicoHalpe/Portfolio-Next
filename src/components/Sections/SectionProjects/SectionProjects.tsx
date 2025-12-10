@@ -3,7 +3,11 @@ import React, { useEffect, useRef } from "react";
 import styles from "./SectionProjects.module.css";
 import useBouncingAnimation from "hooks/useBouncingAnimation";
 import projects from "constants/projects";
-import { ProjectsCarousel } from "components";
+import dynamic from "next/dynamic";
+const ProjectsCarousel = dynamic(() => import("components/ProjectsCarousel/ProjectsCarousel"), {
+	ssr: false,
+	loading: () => <div>Cargando proyectos...</div>,
+});
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 
 export default function SectionProjects() {
