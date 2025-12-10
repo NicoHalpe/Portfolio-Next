@@ -29,7 +29,7 @@ const useTheme = () => {
 		observer.observe(document.documentElement, { attributes: true });
 
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-			const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			const theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 			transitionToTheme(changeTheme(theme));
 		});
 

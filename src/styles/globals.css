@@ -27,7 +27,7 @@ body {
 
 html[theme="light"] {
 	--background-color: white;
-	--color-accent: #229bdd;
+	--color-accent: #1E88D2;
 	--text-color: black;
 	--subtitle-color: rgba(0, 0, 0, 0.7);
 	--paragraph-color: rgba(0, 0, 0, 0.8);
