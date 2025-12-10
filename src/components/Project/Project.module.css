@@ -130,6 +130,14 @@
 	font-size: 1.4rem;
 }
 
+.hover-content span {
+	color: white;
+}
+
+.hover-content svg {
+	stroke: white;
+}
+
 .hover-icon {
 	width: 25px;
 	height: 25px;
